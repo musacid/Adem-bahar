@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قالب النشر الفاخر</title>
+    
+    <!-- استدعاء الخطوط العربية الفاخرة -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- استدعاء مكتبة الأيقونات (FontAwesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- استدعاء مكتبة تحويل الورقة إلى صورة -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <style>
+        :root {
+            --primary-gold: #c5a059;
+            --dark-gold: #8b6d3b;
+            --paper-bg: #f4f5f7; /* الأبيض المائل للسيلفر الفاخر */
+            --text-dark: #2c3e50;
+            --bg-dark: #1a1e23;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-dark);
+            background-image: radial-gradient(circle at center, #2c343b 0%, #1a1e23 100%);
+            font-family: 'Tajawal', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text-dark);
+        }
+
+        /* شريط الأدوات (Toolbar) */
+        .toolbar {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--primary-gold);
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .tool-btn {
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            font-size: 1.2rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .tool-btn:hover {
+            background: var(--primary-gold);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .color-picker {
+            width: 35px;
+            height: 35px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            overflow: hidden;
+            padding: 0;
+        }
+        
+        .color-picker::-webkit-color-swatch-wrapper { padding: 0; }
+        .color-picker::-webkit-color-swatch { border: none; border-radius: 50%; }
+
+        /* تنسيق مجموعات اختيار الألوان */
+        .color-picker-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-gold);
+            font-size: 1.2rem;
+            background: rgba(0,0,0,0.05);
+            padding: 5px 10px;
+            border-radius: 20px;
+        }
+
+        .divider {
+            width: 1px;
+            background: #ccc;
+            margin: 0 5px;
+            height: 30px;
+        }
+
+        .export-btn {
+            background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
+            color: white;
+            border: none;
+            padding: 0 20px;
+            height: 40px;
+            border-radius: 25px;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(197, 160, 89, 0.4);
+        }
+
+        .export-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(197, 160, 89, 0.6);
+        }
+
+        /* القائمة المنسدلة لاختيار القالب */
+        .template-select {
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 1px solid var(--primary-gold);
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--text-dark);
+            font-family: 'Tajawal', sans-serif;
+            font-weight: bold;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s;
+            height: 40px;
+        }
+        .template-select:hover {
+            background: var(--paper-bg);
+        }
+
+        /* حاوية الورقة الأساسية */
+        .paper-container {
+            width: 100%;
+            position: relative;
+            margin-bottom: 50px;
+            padding: 40px;
+            box-sizing: border-box;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            transition: all 0.5s ease; /* حركة ناعمة عند تغيير القالب */
+        }
+
+        /* 1. القالب الملكي (الافتراضي) */
+        .template-royal {
+            max-width: 794px; /* عرض A4 */
+            min-height: 1123px; /* طول A4 */
+            background-color: var(--paper-bg);
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+        }
+
+        /* 2. القالب المربع (للنصوص القصيرة والاقتباسات) */
+        .template-square {
+            max-width: 650px;
+            min-height: 650px;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            color: #f8fafc;
+        }
+        .template-square .content-area { justify-content: center; }
+        .template-square .document-body { flex-grow: 0; color: #e2e8f0; text-align: center; font-size: 1.6rem; }
+        .template-square .document-title { color: #fbbf24; }
+        .template-square .ornate-border { border: 2px dashed rgba(251, 191, 36, 0.5); }
+        .template-square .ornate-border::before { display: none; }
+        .template-square .corner { border-color: #fbbf24; }
+        .template-square .title-divider::before, .template-square .title-divider::after { display: none; }
+        .template-square .title-divider i { color: #fbbf24; font-size: 2rem; }
+        .template-square .signature-box { color: #fbbf24; }
+        .template-square .signature-icon { color: #fbbf24; }
+        .template-square .document-footer { border-top-color: rgba(251, 191, 36, 0.2); justify-content: center; margin-top: 30px; }
+
+        /* 3. القالب الكلاسيكي (ورق قديم) */
+        .template-vintage {
+            max-width: 750px;
+            min-height: 1000px;
+            background-color: #fdf6e3;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+            color: #3e2723;
+        }
+        .template-vintage .document-title { color: #5d4037; font-family: 'Amiri', serif; }
+        .template-vintage .document-body { color: #4e342e; }
+        .template-vintage .ornate-border { border: 3px double #795548; border-radius: 0; }
+        .template-vintage .ornate-border::before { display: none; }
+        .template-vintage .corner { display: none; }
+        .template-vintage .title-divider::before, .template-vintage .title-divider::after { height: 4px; border-top: 1px solid #795548; border-bottom: 1px solid #795548; background: transparent; }
+        .template-vintage .title-divider i { color: #795548; }
+        .template-vintage .signature-box { color: #5d4037; }
+        .template-vintage .signature-icon { color: #795548; }
+        .template-vintage .document-footer { border-top-color: rgba(121, 85, 72, 0.3); }
+
+        /* 4. القالب الزمردي الفاخر */
+        .template-emerald {
+            max-width: 794px;
+            min-height: 1123px;
+            background-color: #064e3b;
+            color: #ecfdf5;
+        }
+        .template-emerald .document-title { color: #fbbf24; }
+        .template-emerald .document-body { color: #d1fae5; }
+        .template-emerald .ornate-border { border: 2px solid #fbbf24; border-radius: 25px; }
+        .template-emerald .ornate-border::before { border: 1px dashed #fcd34d; border-radius: 20px; }
+        .template-emerald .corner { display: none; }
+        .template-emerald .title-divider::before, .template-emerald .title-divider::after { background: transparent; border-top: 2px dashed #fbbf24; }
+        .template-emerald .title-divider i { color: #fbbf24; }
+        .template-emerald .signature-box { color: #fbbf24; }
+        .template-emerald .signature-icon { color: #fcd34d; }
+        .template-emerald .document-footer { border-top-color: rgba(251, 191, 36, 0.3); }
+
+        /* 5. القالب الياقوتي (أزرق وفضي) */
+        .template-sapphire {
+            max-width: 794px;
+            min-height: 1123px;
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+        .template-sapphire .document-title { color: #cbd5e1; }
+        .template-sapphire .document-body { color: #e2e8f0; }
+        .template-sapphire .ornate-border { border: 4px double #94a3b8; border-radius: 0; }
+        .template-sapphire .ornate-border::before { border: 1px solid #cbd5e1; margin: 5px; opacity: 0.3; }
+        .template-sapphire .corner { border-color: #cbd5e1; width: 30px; height: 30px; }
+        .template-sapphire .title-divider::before, .template-sapphire .title-divider::after { background: #94a3b8; }
+        .template-sapphire .title-divider i { color: #94a3b8; }
+        .template-sapphire .signature-box { color: #cbd5e1; }
+        .template-sapphire .signature-icon { color: #94a3b8; }
+        .template-sapphire .document-footer { border-top-color: rgba(148, 163, 184, 0.3); }
+
+        /* 6. القالب الوردي الحالم */
+        .template-rose {
+            max-width: 794px;
+            min-height: 1123px;
+            background-color: #fff1f2;
+            color: #4c0519;
+        }
+        .template-rose .document-title { color: #9f1239; }
+        .template-rose .document-body { color: #881337; }
+        .template-rose .ornate-border { border: 3px solid #fda4af; border-radius: 40px; }
+        .template-rose .ornate-border::before { display: none; }
+        .template-rose .corner { display: none; }
+        .template-rose .title-divider::before, .template-rose .title-divider::after { background: transparent; border-top: 2px dotted #fda4af; }
+        .template-rose .title-divider i { color: #f43f5e; }
+        .template-rose .signature-box { color: #9f1239; }
+        .template-rose .signature-icon { color: #f43f5e; }
+        .template-rose .document-footer { border-top-color: rgba(253, 164, 175, 0.5); }
+
+        /* 7. بطاقة ملاحظة (خلفية صفراء كلاسيكية) */
+        .template-card-note {
+            max-width: 500px;
+            min-height: 450px;
+            background-color: #fef08a;
+            color: #451a03;
+            border-radius: 5px 40px 5px 5px; /* تأثير طية خفيفة في الزاوية */
+            box-shadow: 5px 10px 20px rgba(0,0,0,0.15);
+        }
+        .template-card-note .ornate-border { display: none; }
+        .template-card-note .corner { display: none; }
+        .template-card-note .document-title { color: #b45309; font-family: 'Tajawal', sans-serif; font-size: 2rem; }
+        .template-card-note .title-divider::before, .template-card-note .title-divider::after { background: #ca8a04; }
+        .template-card-note .title-divider i { color: #ca8a04; }
+        .template-card-note .document-footer { border-top: 1px dashed #ca8a04; }
+        .template-card-note .signature-box { color: #b45309; }
+        .template-card-note .signature-icon { color: #ca8a04; }
+
+        /* 8. بطاقة تنبيه (عصرية وحديثة) */
+        .template-card-alert {
+            max-width: 600px;
+            min-height: 350px;
+            background-color: #ffffff;
+            color: #1f2937;
+            border-radius: 12px;
+            border-right: 15px solid #ef4444; /* خط أحمر جانبي للتنبيه */
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .template-card-alert .ornate-border { display: none; }
+        .template-card-alert .corner { display: none; }
+        .template-card-alert .document-title { color: #ef4444; font-family: 'Tajawal', sans-serif; font-size: 2.2rem; }
+        .template-card-alert .title-divider { display: none; } /* إخفاء الفاصل لمظهر عصري */
+        .template-card-alert .document-footer { border-top: 1px solid #f3f4f6; }
+        .template-card-alert .signature-box { color: #9ca3af; font-size: 1.2rem; }
+        .template-card-alert .signature-icon { color: #ef4444; }
+
+        /* 9. بطاقة فائدة (راقية وخضراء) */
+        .template-card-wisdom {
+            max-width: 650px;
+            min-height: 400px;
+            background-color: #022c22;
+            color: #d1fae5;
+            border-radius: 15px;
+        }
+        .template-card-wisdom .ornate-border { border: 2px solid #d4af37; top: 15px; bottom: 15px; left: 15px; right: 15px; border-radius: 10px; }
+        .template-card-wisdom .ornate-border::before { display: none; }
+        .template-card-wisdom .corner { display: none; }
+        .template-card-wisdom .document-title { color: #d4af37; font-family: 'Amiri', serif; }
+        .template-card-wisdom .title-divider::before, .template-card-wisdom .title-divider::after { background: #d4af37; }
+        .template-card-wisdom .title-divider i { color: #d4af37; }
+        .template-card-wisdom .document-footer { border-top: 1px solid rgba(212, 175, 55, 0.3); }
+        .template-card-wisdom .signature-box { color: #d4af37; }
+        .template-card-wisdom .signature-icon { color: #d4af37; }
+
+        /* الإطار الفاخر */
+        .ornate-border {
+            position: absolute;
+            top: 20px; bottom: 20px; left: 20px; right: 20px;
+            border: 2px solid var(--primary-gold);
+            pointer-events: none;
+            z-index: 10;
+            transition: all 0.5s ease;
+        }
+        
+        .ornate-border::before {
+            content: '';
+            position: absolute;
+            top: 6px; bottom: 6px; left: 6px; right: 6px;
+            border: 1px solid var(--dark-gold);
+            opacity: 0.5;
+        }
+
+        /* الزخارف في الزوايا */
+        .corner {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--primary-gold);
+            pointer-events: none;
+            transition: all 0.5s ease;
+        }
+        .corner-tl { top: 15px; right: 15px; border-bottom: none; border-left: none; }
+        .corner-tr { top: 15px; left: 15px; border-bottom: none; border-right: none; }
+        .corner-bl { bottom: 15px; right: 15px; border-top: none; border-left: none; }
+        .corner-br { bottom: 15px; left: 15px; border-top: none; border-right: none; }
+
+        /* منطقة المحتوى القابلة للتعديل */
+        .content-area {
+            position: relative;
+            z-index: 20;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
+        }
+
+        [contenteditable="true"] {
+            outline: none;
+            cursor: text;
+        }
+
+        [contenteditable="true"]:empty:before {
+            content: attr(data-placeholder);
+            color: #aaa;
+            font-style: italic;
+        }
+
+        .document-title {
+            font-family: 'Amiri', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            color: var(--dark-gold);
+            margin-bottom: 20px;
+            font-weight: bold;
+            line-height: 1.3;
+            transition: all 0.5s ease;
+        }
+
+        .title-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+            opacity: 0.7;
+        }
+        
+        .title-divider::before, .title-divider::after {
+            content: '';
+            height: 2px;
+            width: 100px;
+            background: var(--primary-gold);
+            margin: 0 15px;
+            transition: all 0.5s ease;
+        }
+        
+        .title-divider i {
+            color: var(--primary-gold);
+            font-size: 1.5rem;
+            transition: all 0.5s ease;
+        }
+
+        .document-body {
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.3rem;
+            line-height: 2;
+            flex-grow: 1;
+            text-align: justify;
+            color: var(--text-dark);
+            transition: all 0.5s ease;
+        }
+
+        /* منطقة التوقيع (الأسفل) */
+        .document-footer {
+            margin-top: auto; /* يجعل التوقيع يلتصق بأسفل الصفحة دائماً بذكاء، وينزل للأسفل إذا زاد النص */
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px dashed rgba(197, 160, 89, 0.4);
+            transition: all 0.5s ease;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .signature-box {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-family: 'Amiri', serif;
+            font-size: 1.5rem;
+            color: var(--dark-gold);
+            transition: all 0.5s ease;
+        }
+
+        .signature-icon {
+            font-size: 2rem;
+            color: var(--primary-gold);
+            animation: float 3s ease-in-out infinite;
+            transition: all 0.5s ease;
+        }
+
+        .signature-text {
+            min-width: 150px;
+            border-bottom: 1px solid transparent;
+            transition: border 0.3s;
+        }
+        
+        .signature-text:focus {
+            border-bottom: 1px dashed var(--primary-gold);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* رسالة التحميل */
+        #loading-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(26, 30, 35, 0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-gold);
+            z-index: 1000;
+            display: none;
+        }
+        
+        .spinner {
+            font-size: 3rem;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+        
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* جعلها متجاوبة مع الشاشات الأصغر */
+        @media (max-width: 850px) {
+            .paper-container {
+                transform: scale(0.9);
+                transform-origin: top center;
+                margin-bottom: 0;
+            }
+        }
+        @media (max-width: 600px) {
+            .paper-container {
+                transform: scale(0.7);
+            }
+            .toolbar {
+                padding: 10px;
+            }
+            .template-select {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            .divider {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- شريط الأدوات -->
+    <div class="toolbar" id="toolbar">
+        
+        <!-- القائمة المنسدلة لاختيار القالب -->
+        <select class="template-select" onchange="changeTemplate(this.value)" title="اختر تصميم الصفحة">
+            <optgroup label="أوراق ومقالات">
+                <option value="template-royal">الورقة الملكية (A4)</option>
+                <option value="template-square">مربع الاقتباسات (للنصوص القصيرة)</option>
+                <option value="template-vintage">المخطوطة الكلاسيكية (ورق قديم)</option>
+                <option value="template-emerald">الزمردي الفاخر (أخضر وذهبي)</option>
+                <option value="template-sapphire">الياقوت الأزرق (أزرق وفضي)</option>
+                <option value="template-rose">الوردي الحالم (دائري ناعم)</option>
+            </optgroup>
+            <optgroup label="بطاقات مصغرة (للفوائد والملاحظات)">
+                <option value="template-card-note">بطاقة ملاحظة (ورقة لاصقة صفراء)</option>
+                <option value="template-card-alert">بطاقة تنبيه (عصرية ورسمية)</option>
+                <option value="template-card-wisdom">بطاقة فائدة (إسلامية وراقية)</option>
+            </optgroup>
+        </select>
+        
+        <div class="divider"></div>
+
+        <button class="tool-btn" onclick="formatDoc('bold')" title="خط عريض"><i class="fas fa-bold"></i></button>
+        <button class="tool-btn" onclick="formatDoc('italic')" title="خط مائل"><i class="fas fa-italic"></i></button>
+        <button class="tool-btn" onclick="formatDoc('underline')" title="خط سفلي"><i class="fas fa-underline"></i></button>
+        
+        <div class="divider"></div>
+        
+        <button class="tool-btn" onclick="changeFontSize(1)" title="تكبير الخط"><i class="fas fa-search-plus"></i></button>
+        <button class="tool-btn" onclick="changeFontSize(-1)" title="تصغير الخط"><i class="fas fa-search-minus"></i></button>
+        
+        <div class="divider"></div>
+        
+        <button class="tool-btn" onclick="formatDoc('justifyRight')" title="محاذاة لليمين"><i class="fas fa-align-right"></i></button>
+        <button class="tool-btn" onclick="formatDoc('justifyCenter')" title="محاذاة للوسط"><i class="fas fa-align-center"></i></button>
+        <button class="tool-btn" onclick="formatDoc('justifyLeft')" title="محاذاة لليسار"><i class="fas fa-align-left"></i></button>
+        
+        <div class="divider"></div>
+        
+        <div class="color-picker-group">
+            <i class="fas fa-font" title="لون النص"></i>
+            <input type="color" class="color-picker" id="textColor" oninput="formatDoc('foreColor', this.value)" title="لون النص">
+        </div>
+
+        <div class="color-picker-group">
+            <i class="fas fa-fill-drip" title="لون الخلفية"></i>
+            <input type="color" class="color-picker" id="bgColor" oninput="changeBgColor(this.value)" value="#f4f5f7" title="لون الخلفية المخصصة">
+        </div>
+        
+        <div class="divider"></div>
+        
+        <button class="export-btn" onclick="exportAsImage()">
+            <i class="fas fa-camera"></i> حفظ كصورة للنشر
+        </button>
+    </div>
+
+    <!-- الورقة القابلة للتعديل والتصوير -->
+    <div class="paper-container template-royal" id="paper-capture">
+        <!-- الزخارف والإطارات -->
+        <div class="ornate-border"></div>
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <!-- المحتوى الفعلي -->
+        <div class="content-area">
+            
+            <!-- العنوان -->
+            <div class="document-title" contenteditable="true" data-placeholder="اكتب العنوان الرئيسي هنا..."></div>
+            
+            <div class="title-divider">
+                <i class="fas fa-leaf" id="divider-icon"></i>
+            </div>
+
+            <!-- النص الأساسي -->
+            <div class="document-body" contenteditable="true" data-placeholder="ابدأ بكتابة موضوعك الشيق هنا... يمكنك تحديد أي نص واستخدام شريط الأدوات في الأعلى لتغيير لونه، تكبيره، أو جعله غامقاً."></div>
+
+            <!-- التوقيع -->
+            <div class="document-footer">
+                <div class="signature-box">
+                    <span class="signature-text" contenteditable="true" data-placeholder="اسم الكاتب...">كتبه: </span>
+                    <i class="fas fa-hand-holding-pen signature-icon"></i>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- شاشة التحميل عند حفظ الصورة -->
+    <div id="loading-overlay">
+        <i class="fas fa-circle-notch spinner"></i>
+        <h2>جاري تحضير الصورة الفاخرة...</h2>
+    </div>
+
+    <script>
+        // دالة لتطبيق التنسيقات على النص المحدد
+        function formatDoc(cmd, value=null) {
+            document.execCommand(cmd, false, value);
+        }
+
+        // دالة لتكبير وتصغير الخط
+        let currentSize = 4; // الحجم الافتراضي (1-7)
+        function changeFontSize(step) {
+            currentSize += step;
+            if (currentSize > 7) currentSize = 7;
+            if (currentSize < 1) currentSize = 1;
+            formatDoc('fontSize', currentSize);
+        }
+
+        // دالة لتغيير القالب بضغطة واحدة
+        function changeTemplate(templateClass) {
+            const paper = document.getElementById('paper-capture');
+            const dividerIcon = document.getElementById('divider-icon');
+
+            // إزالة جميع قوالب التصميم الحالية (تمت إضافة البطاقات الجديدة)
+            paper.classList.remove(
+                'template-royal', 'template-square', 'template-vintage', 
+                'template-emerald', 'template-sapphire', 'template-rose',
+                'template-card-note', 'template-card-alert', 'template-card-wisdom'
+            );
+            
+            // إضافة القالب الجديد الذي تم اختياره
+            paper.classList.add(templateClass);
+            
+            // إعادة ضبط لون الخلفية المخصص عند تغيير القالب ليعود لألوانه الأصلية
+            paper.style.backgroundColor = '';
+
+            // تغيير أيقونة الفاصل (السطر تحت العنوان) حسب القالب بذكاء
+            switch(templateClass) {
+                case 'template-square':
+                    dividerIcon.className = 'fas fa-quote-right';
+                    break;
+                case 'template-vintage':
+                    dividerIcon.className = 'fas fa-feather-alt';
+                    break;
+                case 'template-emerald':
+                    dividerIcon.className = 'fas fa-gem';
+                    break;
+                case 'template-sapphire':
+                    dividerIcon.className = 'fas fa-star';
+                    break;
+                case 'template-rose':
+                    dividerIcon.className = 'fas fa-heart';
+                    break;
+                case 'template-card-note':
+                    dividerIcon.className = 'fas fa-pen-nib';
+                    break;
+                case 'template-card-wisdom':
+                    dividerIcon.className = 'fas fa-star-and-crescent';
+                    break;
+                default:
+                    dividerIcon.className = 'fas fa-leaf'; // القالب الملكي والافتراضي
+            }
+        }
+
+        // دالة لتغيير لون الخلفية يدوياً
+        function changeBgColor(color) {
+            const paper = document.getElementById('paper-capture');
+            paper.style.backgroundColor = color;
+        }
+
+        // دالة تحويل الورقة إلى صورة وتحميلها
+        function exportAsImage() {
+            const paper = document.getElementById('paper-capture');
+            const overlay = document.getElementById('loading-overlay');
+            
+            // إظهار شاشة التحميل
+            overlay.style.display = 'flex';
+
+            // التأكد من أن جميع الخطوط تم تحميلها قبل التصوير
+            document.fonts.ready.then(() => {
+                // استخدام html2canvas لالتقاط الورقة
+                html2canvas(paper, {
+                    scale: 2, // جودة عالية (Retina)
+                    useCORS: true,
+                    backgroundColor: null // للحفاظ على الشفافية إن وجدت
+                }).then(canvas => {
+                    // إخفاء شاشة التحميل
+                    overlay.style.display = 'none';
+                    
+                    // تحويل الكانفاس إلى رابط صورة
+                    const image = canvas.toDataURL("image/png");
+                    
+                    // إنشاء رابط وهمي للتحميل
+                    const link = document.createElement('a');
+                    link.download = 'مقال_فاخر.png';
+                    link.href = image;
+                    link.click();
+                }).catch(err => {
+                    overlay.style.display = 'none';
+                    alert("حدث خطأ أثناء التقاط الصورة. يرجى المحاولة مرة أخرى.");
+                    console.error(err);
+                });
+            });
+        }
+
+        // تركيز المؤشر تلقائياً على العنوان عند فتح الصفحة
+        window.onload = function() {
+            const title = document.querySelector('.document-title');
+            title.focus();
+        };
+    </script>
+</body>
+</html>
