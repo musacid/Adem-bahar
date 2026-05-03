@@ -64,9 +64,9 @@
         }
         .export-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(197, 160, 89, 0.5); }
         
-        /* زر المشاركة (جديد) */
+        /* زر المشاركة */
         .share-btn {
-            background: linear-gradient(135deg, #0ea5e9, #0369a1); /* لون أزرق أنيق */
+            background: linear-gradient(135deg, #0ea5e9, #0369a1); 
             box-shadow: 0 4px 15px rgba(14, 165, 233, 0.4);
         }
         .share-btn:hover { box-shadow: 0 6px 20px rgba(14, 165, 233, 0.6); }
@@ -81,6 +81,14 @@
             padding: 6px 10px; border-radius: 6px; border: 1px solid #cbd5e1; background: #f8fafc;
             color: var(--text-dark); font-family: 'Tajawal', sans-serif; font-weight: bold; cursor: pointer; outline: none;
         }
+        
+        .color-picker-group {
+            display: flex; align-items: center; gap: 8px; color: var(--text-dark); font-size: 1.1rem;
+            background: rgba(0,0,0,0.04); padding: 5px 10px; border-radius: 8px; border: 1px solid #e2e8f0;
+        }
+        .color-picker { width: 30px; height: 30px; border: none; border-radius: 5px; cursor: pointer; padding: 0; }
+        .color-picker::-webkit-color-swatch-wrapper { padding: 0; }
+        .color-picker::-webkit-color-swatch { border: none; border-radius: 5px; }
 
         /* --- نظام الاستوديو (اللوحات الجانبية والورقة) --- */
         .studio-layout {
@@ -103,50 +111,29 @@
             top: 90px;
             max-height: calc(100vh - 120px);
             overflow-y: auto;
-            padding-right: 5px; /* لشريط التمرير */
+            padding-right: 5px;
         }
         
-        /* إخفاء شريط التمرير الجمالي */
         .sidebar::-webkit-scrollbar { width: 4px; }
         .sidebar::-webkit-scrollbar-thumb { background: rgba(197, 160, 89, 0.5); border-radius: 10px; }
 
         .category-title {
-            color: #cbd5e1;
-            font-family: 'Amiri', serif;
-            font-size: 1.2rem;
-            text-align: center;
-            margin-bottom: 10px;
-            border-bottom: 1px dashed rgba(203, 213, 225, 0.3);
-            padding-bottom: 5px;
+            color: #cbd5e1; font-family: 'Amiri', serif; font-size: 1.2rem;
+            text-align: center; margin-bottom: 10px; border-bottom: 1px dashed rgba(203, 213, 225, 0.3); padding-bottom: 5px;
         }
 
         /* زر القالب المصغر (Thumbnail) */
         .template-thumb {
-            width: 100%;
-            height: 60px;
-            border-radius: 8px;
-            border: 2px solid transparent;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Tajawal', sans-serif;
-            font-weight: bold;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            position: relative;
-            overflow: hidden;
+            width: 100%; height: 60px; border-radius: 8px; border: 2px solid transparent; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; font-family: 'Tajawal', sans-serif;
+            font-weight: bold; font-size: 0.9rem; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.3); position: relative; overflow: hidden;
         }
         .template-thumb:hover { transform: scale(1.05); }
         .template-thumb.active { border-color: white; box-shadow: 0 0 15px rgba(197, 160, 89, 0.8); transform: scale(1.05); }
 
         /* منطقة الورقة الأساسية */
         .main-editor-area {
-            flex-grow: 1;
-            display: flex;
-            justify-content: center;
-            min-width: 0; /* لمنع تجاوز العرض */
+            flex-grow: 1; display: flex; justify-content: center; min-width: 0;
         }
 
         .paper-container {
@@ -155,90 +142,116 @@
             background-color: var(--paper-bg);
         }
 
-        /* --- أنماط القوالب (Thumbnails + Paper) --- */
-        
-        /* 1. الملكي */
+        /* --- أنماط القوالب المصغرة (Thumbnails) --- */
         .thumb-royal { background: #fdfbf7; color: #8b6d3b; border: 1px solid #c5a059; }
+        .thumb-haramain { background: #0b3d2c; color: #d4af37; border: 1px solid #d4af37; }
+        .thumb-university { background: #ffffff; color: #166534; border-top: 5px solid #166534; }
+        .thumb-personal { background: #0f172a; color: #e2e8f0; border-left: 5px solid #c5a059; }
+        .thumb-islamic { background: #ffffff; color: #0F4435; border: 2px solid #0F4435; }
+        .thumb-velvet { background: #0a0a0a; color: #facc15; border: 1px solid #a16207; }
+        .thumb-vintage { background: #fdf6e3; color: #5d4037; border: 1px solid #795548; }
+        .thumb-leather { background: #3e2723; color: #ffb300; border: 1px dashed #a1887f; }
+        .thumb-ocean { background: #004d40; color: #80cbc4; border: 2px solid #80cbc4; }
+        .thumb-poetry { background: #faf7f2; color: #8b6d3b; border-right: 4px double #8b6d3b; border-left: 4px double #8b6d3b; }
+        .thumb-red { background: #881337; color: #fca5a5; border: 2px solid #fca5a5; }
+
+        .thumb-square { background: #1e293b; color: #fbbf24; }
+        .thumb-cinematic { background: #000; color: #fff; border: 1px solid #333; }
+        .thumb-wisdom { background: #022c22; color: #d4af37; border-radius: 10px; }
+        .thumb-alert { background: #ffffff; color: #ef4444; border-right: 4px solid #ef4444; }
+        .thumb-news { background: #b91c1c; color: white; border-bottom: 4px solid #000; }
+        .thumb-minimal { background: #fff; color: #000; border: 1px solid #e2e8f0; }
+        .thumb-greeting { background: #1e1b4b; color: #fde047; border: 1px solid #facc15; }
+        .thumb-note { background: #fef08a; color: #b45309; }
+
+        /* --- أنماط الورقة الفعلية (Papers) --- */
         .template-royal { max-width: 794px; min-height: 1123px; color: var(--text-dark); }
         
-        /* 2. الحرمين (جديد) */
-        .thumb-haramain { background: #0b3d2c; color: #d4af37; border: 1px solid #d4af37; }
         .template-haramain { max-width: 794px; min-height: 1123px; background-color: #0b3d2c; color: #fdfbf7; }
-        .template-haramain .document-title { color: #d4af37; font-family: 'Amiri', serif; }
-        .template-haramain .document-body { color: #fdfbf7; }
-        .template-haramain .ornate-border { border: 4px solid #d4af37; border-radius: 5px; }
-        .template-haramain .ornate-border::before { border: 1px solid #d4af37; margin: 4px; opacity: 0.8; }
+        .template-haramain .document-title { color: #d4af37; font-family: 'Amiri', serif; } .template-haramain .document-body { color: #fdfbf7; }
+        .template-haramain .ornate-border { border: 4px solid #d4af37; border-radius: 5px; } .template-haramain .ornate-border::before { border: 1px solid #d4af37; margin: 4px; opacity: 0.8; }
         .template-haramain .corner { border-color: #d4af37; border-radius: 50%; width: 30px; height: 30px; }
-        .template-haramain .title-divider::before, .template-haramain .title-divider::after { background: #d4af37; }
-        .template-haramain .title-divider i { color: #d4af37; }
-        .template-haramain .signature-box, .template-haramain .social-handle { color: #d4af37; }
-        .template-haramain .signature-icon { color: #d4af37; }
-        .template-haramain .document-footer { border-top-color: rgba(212, 175, 55, 0.3); }
+        .template-haramain .title-divider::before, .template-haramain .title-divider::after { background: #d4af37; } .template-haramain .title-divider i { color: #d4af37; }
+        .template-haramain .signature-box, .template-haramain .social-handle { color: #d4af37; } .template-haramain .signature-icon { color: #d4af37; } .template-haramain .document-footer { border-top-color: rgba(212, 175, 55, 0.3); }
 
-        /* 3. الجامعة الإسلامية (جديد) */
-        .thumb-university { background: #ffffff; color: #166534; border-top: 5px solid #166534; }
         .template-university { max-width: 794px; min-height: 1123px; background-color: #ffffff; color: #1e293b; }
         .template-university .document-title { color: #166534; font-family: 'Tajawal', sans-serif; font-weight: 800; border-bottom: 2px solid #166534; padding-bottom: 10px; display: inline-block; }
-        .template-university .document-body { color: #334155; text-align: justify; }
-        .template-university .ornate-border { border: 2px solid #166534; top: 15px; bottom: 15px; left: 15px; right: 15px; }
-        .template-university .ornate-border::before { display: none; }
-        .template-university .corner { display: none; }
-        .template-university .title-divider { display: none; }
-        .template-university .signature-box, .template-university .social-handle { color: #166534; }
-        .template-university .signature-icon { display: none; }
-        .template-university .document-footer { border-top: 1px solid #cbd5e1; }
+        .template-university .document-body { color: #334155; text-align: justify; } .template-university .ornate-border { border: 2px solid #166534; top: 15px; bottom: 15px; left: 15px; right: 15px; }
+        .template-university .ornate-border::before, .template-university .corner, .template-university .title-divider { display: none; }
+        .template-university .signature-box, .template-university .social-handle { color: #166534; } .template-university .signature-icon { display: none; } .template-university .document-footer { border-top: 1px solid #cbd5e1; }
 
-        /* 4. الهوية الشخصية (جديد) */
-        .thumb-personal { background: #0f172a; color: #e2e8f0; border-left: 5px solid #c5a059; }
         .template-personal { max-width: 794px; min-height: 1123px; background-color: #0f172a; color: #f8fafc; }
-        .template-personal .document-title { color: #c5a059; text-align: right; font-family: 'Cairo', sans-serif; }
-        .template-personal .document-body { color: #cbd5e1; }
+        .template-personal .document-title { color: #c5a059; text-align: right; font-family: 'Cairo', sans-serif; } .template-personal .document-body { color: #cbd5e1; }
         .template-personal .ornate-border { border-right: 4px solid #c5a059; border-top: none; border-bottom: none; border-left: none; left: auto; right: 20px; top: 0; bottom: 0; }
-        .template-personal .ornate-border::before { display: none; }
-        .template-personal .corner { display: none; }
-        .template-personal .title-divider { justify-content: flex-start; margin-right: 20px; }
-        .template-personal .title-divider::before { display: none; } .template-personal .title-divider::after { width: 200px; background: #c5a059; margin-right: 10px; }
-        .template-personal .title-divider i { color: #c5a059; font-size: 1rem; }
-        .template-personal .signature-box, .template-personal .social-handle { color: #94a3b8; }
-        .template-personal .signature-icon { color: #c5a059; }
-        .template-personal .document-footer { border-top: none; }
+        .template-personal .ornate-border::before, .template-personal .corner { display: none; }
+        .template-personal .title-divider { justify-content: flex-start; margin-right: 20px; } .template-personal .title-divider::before { display: none; } .template-personal .title-divider::after { width: 200px; background: #c5a059; margin-right: 10px; }
+        .template-personal .title-divider i { color: #c5a059; font-size: 1rem; } .template-personal .signature-box, .template-personal .social-handle { color: #94a3b8; } .template-personal .signature-icon { color: #c5a059; } .template-personal .document-footer { border-top: none; }
 
-        /* 5. الإسلامية الأصلية (صورة المستخدم) */
-        .thumb-islamic { background: #ffffff; color: #0F4435; border: 2px solid #0F4435; }
         .template-islamic { max-width: 794px; min-height: 1123px; background-color: #ffffff; color: #0F4435; }
         .template-islamic .document-title { color: #0F4435; font-family: 'Amiri', serif; }
-        .template-islamic .ornate-border { border: 18px solid #0F4435; border-radius: 10px; }
-        .template-islamic .ornate-border::before { border: 2px dashed #C4A265; top: 5px; bottom: 5px; left: 5px; right: 5px; opacity: 1; }
-        .template-islamic .corner { display: none; } 
-        .template-islamic .title-divider::before, .template-islamic .title-divider::after { background: #C4A265; height: 1px; } 
-        .template-islamic .title-divider i { color: #0F4435; }
-        .template-islamic .signature-box, .template-islamic .social-handle { color: #0F4435; } .template-islamic .signature-icon { color: #C4A265; }
-        .template-islamic .document-footer { border-top: 1px solid rgba(196, 162, 101, 0.3); }
+        .template-islamic .ornate-border { border: 18px solid #0F4435; border-radius: 10px; } .template-islamic .ornate-border::before { border: 2px dashed #C4A265; top: 5px; bottom: 5px; left: 5px; right: 5px; opacity: 1; }
+        .template-islamic .corner { display: none; } .template-islamic .title-divider::before, .template-islamic .title-divider::after { background: #C4A265; height: 1px; } 
+        .template-islamic .title-divider i { color: #0F4435; } .template-islamic .signature-box, .template-islamic .social-handle { color: #0F4435; } .template-islamic .signature-icon { color: #C4A265; } .template-islamic .document-footer { border-top: 1px solid rgba(196, 162, 101, 0.3); }
 
-        /* 6. المخملية */
-        .thumb-velvet { background: #0a0a0a; color: #facc15; border: 1px solid #a16207; }
         .template-velvet { max-width: 794px; min-height: 1123px; background-color: #0a0a0a; color: #facc15; }
         .template-velvet .document-title { color: #fde047; text-shadow: 0 2px 10px rgba(250, 204, 21, 0.3); } .template-velvet .document-body { color: #fef08a; }
         .template-velvet .ornate-border { border: 2px solid #eab308; box-shadow: inset 0 0 20px rgba(234, 179, 8, 0.2); } .template-velvet .ornate-border::before { border: 1px solid #a16207; margin: 4px; }
         .template-velvet .corner { border-color: #facc15; width: 50px; height: 50px; } .template-velvet .title-divider::before, .template-velvet .title-divider::after { background: #eab308; box-shadow: 0 0 5px #eab308; }
         .template-velvet .title-divider i { color: #facc15; text-shadow: 0 0 10px #eab308; } .template-velvet .signature-box, .template-velvet .social-handle { color: #fde047; } .template-velvet .document-footer { border-top-color: rgba(234, 179, 8, 0.3); }
 
-        /* 7. المخطوطة */
-        .thumb-vintage { background: #fdf6e3; color: #5d4037; border: 1px solid #795548; }
         .template-vintage { max-width: 750px; min-height: 1000px; background-color: #fdf6e3; color: #3e2723; }
         .template-vintage .document-title { color: #5d4037; } .template-vintage .document-body { color: #4e342e; }
-        .template-vintage .ornate-border { border: 3px double #795548; border-radius: 0; } .template-vintage .ornate-border::before { display: none; } .template-vintage .corner { display: none; }
+        .template-vintage .ornate-border { border: 3px double #795548; border-radius: 0; } .template-vintage .ornate-border::before, .template-vintage .corner { display: none; }
         .template-vintage .title-divider::before, .template-vintage .title-divider::after { height: 4px; border-top: 1px solid #795548; border-bottom: 1px solid #795548; background: transparent; }
         .template-vintage .title-divider i { color: #795548; } .template-vintage .signature-box, .template-vintage .social-handle { color: #5d4037; } .template-vintage .document-footer { border-top-color: rgba(121, 85, 72, 0.3); }
 
+        /* قوالب أوراق جديدة */
+        .template-leather { max-width: 794px; min-height: 1123px; background-color: #3e2723; color: #d7ccc8; }
+        .template-leather .document-title { color: #ffb300; } .template-leather .document-body { color: #d7ccc8; }
+        .template-leather .ornate-border { border: 2px dashed #a1887f; border-radius: 15px; margin: 10px; } .template-leather .ornate-border::before, .template-leather .corner { display: none; }
+        .template-leather .title-divider::before, .template-leather .title-divider::after { background: #ffb300; } .template-leather .title-divider i { color: #ffb300; }
+        .template-leather .signature-box, .template-leather .social-handle { color: #ffb300; } .template-leather .signature-icon { color: #a1887f; } .template-leather .document-footer { border-top-color: rgba(161, 136, 127, 0.3); }
+
+        .template-ocean { max-width: 794px; min-height: 1123px; background-color: #004d40; color: #e0f2f1; }
+        .template-ocean .document-title { color: #80cbc4; } .template-ocean .ornate-border { border: 3px solid #80cbc4; border-radius: 0 40px 0 40px; }
+        .template-ocean .ornate-border::before, .template-ocean .corner { display: none; } .template-ocean .title-divider::before, .template-ocean .title-divider::after { background: #80cbc4; }
+        .template-ocean .title-divider i, .template-ocean .signature-box, .template-ocean .social-handle { color: #80cbc4; } .template-ocean .document-footer { border-top-color: rgba(128, 203, 196, 0.3); }
+
+        .template-poetry { max-width: 794px; min-height: 1123px; background-color: #faf7f2; color: #2c3e50; }
+        .template-poetry .document-title { color: #8b6d3b; font-family: 'Aref Ruqaa', serif; font-size: 3rem; } .template-poetry .document-body { text-align: center; font-size: 1.6rem; font-family: 'Amiri', serif; }
+        .template-poetry .ornate-border { border: none; border-right: 6px double #8b6d3b; border-left: 6px double #8b6d3b; left: 30px; right: 30px; top: 10px; bottom: 10px; }
+        .template-poetry .ornate-border::before, .template-poetry .corner { display: none; } .template-poetry .title-divider::before, .template-poetry .title-divider::after { background: #8b6d3b; }
+        .template-poetry .title-divider i, .template-poetry .signature-box, .template-poetry .social-handle { color: #8b6d3b; } .template-poetry .document-footer { border-top-color: rgba(139, 109, 59, 0.3); }
+
+        .template-red { max-width: 794px; min-height: 1123px; background-color: #881337; color: #ffe4e6; }
+        .template-red .document-title { color: #fecdd3; } .template-red .ornate-border { border: 5px double #fca5a5; border-radius: 20px; }
+        .template-red .ornate-border::before, .template-red .corner { display: none; } .template-red .title-divider::before, .template-red .title-divider::after { background: #fca5a5; }
+        .template-red .title-divider i { color: #fecdd3; } .template-red .signature-box, .template-red .social-handle { color: #fca5a5; } .template-red .document-footer { border-top-color: rgba(252, 165, 165, 0.3); }
+
         /* --- البطاقات --- */
-        .thumb-square { background: #1e293b; color: #fbbf24; }
         .template-square { max-width: 650px; min-height: 650px; background: linear-gradient(135deg, #1e293b, #0f172a); color: #f8fafc; }
         .template-square .content-area { justify-content: center; } .template-square .document-body { flex-grow: 0; text-align: center; font-size: 1.6rem; }
-        .template-square .document-title { color: #fbbf24; } .template-square .ornate-border { border: 2px dashed rgba(251, 191, 36, 0.5); } .template-square .ornate-border::before { display: none; } .template-square .corner { border-color: #fbbf24; }
-        .template-square .title-divider { display: none; } .template-square .signature-box, .template-square .social-handle { color: #fbbf24; } .template-square .document-footer { border-top-color: rgba(251, 191, 36, 0.2); justify-content: space-between; margin-top: 30px; }
+        .template-square .document-title { color: #fbbf24; } .template-square .ornate-border { border: 2px dashed rgba(251, 191, 36, 0.5); } .template-square .ornate-border::before, .template-square .corner, .template-square .title-divider { display: none; } 
+        .template-square .signature-box, .template-square .social-handle { color: #fbbf24; } .template-square .document-footer { border-top-color: rgba(251, 191, 36, 0.2); justify-content: space-between; margin-top: 30px; }
 
-        .thumb-cinematic { background: #000; color: #fff; border: 1px solid #333; }
+        .template-card-wisdom { max-width: 650px; min-height: 400px; background-color: #022c22; color: #d1fae5; border-radius: 15px; }
+        .template-card-wisdom .ornate-border { border: 2px solid #d4af37; top: 15px; bottom: 15px; left: 15px; right: 15px; border-radius: 10px; }
+        .template-card-wisdom .ornate-border::before, .template-card-wisdom .corner { display: none; }
+        .template-card-wisdom .document-title, .template-card-wisdom .title-divider i, .template-card-wisdom .signature-box, .template-card-wisdom .social-handle { color: #d4af37; }
+        .template-card-wisdom .title-divider::before, .template-card-wisdom .title-divider::after { background: #d4af37; } .template-card-wisdom .document-footer { border-top: 1px solid rgba(212, 175, 55, 0.3); }
+
+        .template-card-news { max-width: 600px; min-height: 350px; background-color: #b91c1c; color: #ffffff; border-radius: 0; box-shadow: 0 10px 25px rgba(0,0,0,0.3); border-bottom: 15px solid #000000; }
+        .template-card-news .ornate-border, .template-card-news .corner, .template-card-news .title-divider { display: none; }
+        .template-card-news .document-title { color: #ffffff; background: #000000; display: inline-block; padding: 5px 20px; font-family: 'Changa', sans-serif; font-size: 2rem; margin-bottom: 20px;}
+        .template-card-news .document-body { font-size: 1.5rem; font-weight: bold; } .template-card-news .document-footer { border-top: 1px solid rgba(255,255,255,0.2); } .template-card-news .signature-box, .template-card-news .social-handle { color: #fca5a5; }
+
+        .template-card-greeting { max-width: 650px; min-height: 650px; background: linear-gradient(to bottom, #1e1b4b, #312e81); color: #e0e7ff; }
+        .template-card-greeting .content-area { justify-content: center; text-align: center; } .template-card-greeting .document-title { color: #fde047; font-family: 'Reem Kufi', sans-serif; font-size: 3rem; }
+        .template-card-greeting .document-body { flex-grow: 0; font-size: 1.8rem; line-height: 2.2; }
+        .template-card-greeting .ornate-border { border: 4px solid #facc15; border-radius: 50% 50% 10px 10px / 20% 20% 10px 10px; top: 25px; bottom: 25px; left: 25px; right: 25px; }
+        .template-card-greeting .ornate-border::before, .template-card-greeting .corner { display: none; } .template-card-greeting .title-divider::before, .template-card-greeting .title-divider::after { background: #facc15; }
+        .template-card-greeting .title-divider i, .template-card-greeting .signature-box, .template-card-greeting .social-handle { color: #fde047; } .template-card-greeting .document-footer { border-top: none; margin-top: 40px; justify-content: center; } .template-card-greeting .social-handle { display: none; }
+
         .template-card-cinematic { max-width: 850px; min-height: 450px; background-color: #000000; color: #ffffff; }
         .template-card-cinematic .content-area { justify-content: center; padding: 50px; }
         .template-card-cinematic .document-title { color: #a1a1aa; font-family: 'Tajawal', sans-serif; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 5px; margin-bottom: 30px; }
@@ -247,17 +260,21 @@
         .template-card-cinematic .ornate-border::before, .template-card-cinematic .corner, .template-card-cinematic .title-divider { display: none; }
         .template-card-cinematic .document-footer { border-top: none; margin-top: 40px; } .template-card-cinematic .signature-box, .template-card-cinematic .social-handle { color: #71717a; font-size: 1rem; } .template-card-cinematic .signature-icon { display: none; }
 
-        .thumb-wisdom { background: #022c22; color: #d4af37; border-radius: 10px; }
-        .template-card-wisdom { max-width: 650px; min-height: 400px; background-color: #022c22; color: #d1fae5; border-radius: 15px; }
-        .template-card-wisdom .ornate-border { border: 2px solid #d4af37; top: 15px; bottom: 15px; left: 15px; right: 15px; border-radius: 10px; }
-        .template-card-wisdom .ornate-border::before, .template-card-wisdom .corner { display: none; }
-        .template-card-wisdom .document-title, .template-card-wisdom .title-divider i, .template-card-wisdom .signature-box, .template-card-wisdom .social-handle { color: #d4af37; }
-        .template-card-wisdom .title-divider::before, .template-card-wisdom .title-divider::after { background: #d4af37; } .template-card-wisdom .document-footer { border-top: 1px solid rgba(212, 175, 55, 0.3); }
-
-        .thumb-alert { background: #ffffff; color: #ef4444; border-right: 4px solid #ef4444; }
         .template-card-alert { max-width: 600px; min-height: 350px; background-color: #ffffff; color: #1f2937; border-radius: 12px; border-right: 15px solid #ef4444; }
         .template-card-alert .ornate-border, .template-card-alert .corner, .template-card-alert .title-divider { display: none; }
         .template-card-alert .document-title { color: #ef4444; } .template-card-alert .document-footer { border-top: 1px solid #f3f4f6; } .template-card-alert .signature-box, .template-card-alert .social-handle { color: #9ca3af; }
+
+        .template-card-note { max-width: 500px; min-height: 450px; background-color: #fef08a; color: #451a03; border-radius: 5px 40px 5px 5px; box-shadow: 5px 10px 20px rgba(0,0,0,0.15); }
+        .template-card-note .ornate-border, .template-card-note .corner { display: none; }
+        .template-card-note .document-title { color: #b45309; } .template-card-note .title-divider::before, .template-card-note .title-divider::after { background: #ca8a04; }
+        .template-card-note .title-divider i { color: #ca8a04; } .template-card-note .document-footer { border-top: 1px dashed #ca8a04; } .template-card-note .signature-box, .template-card-note .social-handle { color: #b45309; }
+
+        .template-card-minimal { max-width: 650px; min-height: 400px; background-color: #ffffff; color: #000000; border-radius: 0; }
+        .template-card-minimal .ornate-border, .template-card-minimal .corner, .template-card-minimal .document-title, .template-card-minimal .title-divider { display: none; }
+        .template-card-minimal .document-body { font-size: 2.2rem; font-family: 'Tajawal', sans-serif; font-weight: 800; text-align: center; color: #000; line-height: 1.6; }
+        .template-card-minimal .document-body::before { content: '“'; font-size: 5rem; color: #cbd5e1; display: block; height: 40px; margin-bottom: 20px; }
+        .template-card-minimal .document-footer { border-top: none; justify-content: center; } .template-card-minimal .signature-box { color: #64748b; font-size: 1.2rem; font-family: 'Tajawal', sans-serif; font-weight: bold; }
+        .template-card-minimal .signature-icon, .template-card-minimal .social-handle { display: none; }
 
         /* الإطار المشترك والعناصر الأساسية للورقة */
         .ornate-border { position: absolute; top: 20px; bottom: 20px; left: 20px; right: 20px; border: 2px solid var(--primary-gold); pointer-events: none; z-index: 10; transition: all 0.5s ease; }
@@ -266,7 +283,7 @@
         .corner-tl { top: 15px; right: 15px; border-bottom: none; border-left: none; } .corner-tr { top: 15px; left: 15px; border-bottom: none; border-right: none; }
         .corner-bl { bottom: 15px; right: 15px; border-top: none; border-left: none; } .corner-br { bottom: 15px; left: 15px; border-top: none; border-right: none; }
 
-        .content-area { position: relative; z-index: 20; height: 100%; display: flex; flex-direction: column; padding: 20px 30px 30px 30px; }
+        .content-area { position: relative; z-index: 20; height: 100%; display: flex; flex-direction: column; padding: 20px 30px 45px 30px; /* تمت زيادة المساحة السفلية لرفع التذييل عن الإطار */ }
 
         /* الشعار (الختم) */
         .author-badge {
@@ -281,18 +298,21 @@
         .badge-text-content { font-family: 'Amiri', serif; text-align: center; color: var(--dark-gold); z-index: 2; display: flex; flex-direction: column; justify-content: center; align-items: center; line-height: 1.1; }
         .badge-name1 { font-size: 0.85rem; font-weight: bold; } .badge-divider { width: 35px; height: 1px; background-color: currentColor; margin: 4px 0; opacity: 0.7; } .badge-name2 { font-size: 1.05rem; font-weight: 900; }
         
-        /* تلوين الختم للقوالب الجديدة */
+        /* تلوين الختم للقوالب */
         .template-haramain .author-badge { background: #0b3d2c; border-color: #d4af37; box-shadow: 0 0 0 4px #0b3d2c; } .template-haramain .author-badge::before { border: 4px dotted #0b3d2c; top: -10px; left: -10px; right: -10px; bottom: -10px; animation: none; } .template-haramain .author-badge::after { border-color: #d4af37; } .template-haramain .badge-text-content { color: #d4af37; }
         .template-university .author-badge { background: #fff; border-color: #166534; border-radius: 10px; } .template-university .author-badge::before { display: none; } .template-university .author-badge::after { border-radius: 8px; border-color: #166534; } .template-university .badge-text-content { color: #166534; font-family: 'Tajawal', sans-serif; }
         .template-personal .author-badge { background: #c5a059; border: none; border-radius: 0 0 20px 20px; top: 0; width: 60px; height: 80px; } .template-personal .author-badge::before, .template-personal .author-badge::after { display: none; } .template-personal .badge-text-content { color: #0f172a; } .template-personal .badge-divider { display: none; }
-
-        /* باقي تلوين الأختام */
         .template-islamic .author-badge { background: #0F4435; border: 2px solid #C4A265; box-shadow: 0 0 0 4px #0F4435; } .template-islamic .author-badge::before { border: 4px dotted #0F4435; top: -10px; left: -10px; right: -10px; bottom: -10px; animation: none; } .template-islamic .author-badge::after { border-color: #C4A265; } .template-islamic .badge-text-content { color: #C4A265; }
         .template-square .author-badge { background: #0f172a; border-color: #fbbf24; } .template-square .author-badge::before { border-color: #fbbf24; border-style: dotted; } .template-square .badge-text-content { color: #fbbf24; }
         .template-vintage .author-badge { background: #fdf6e3; border-color: #795548; box-shadow: 0 0 0 2px #795548; } .template-vintage .author-badge::before { display: none; } .template-vintage .badge-text-content { color: #5d4037; }
         .template-velvet .author-badge { background: #0a0a0a; border-color: #eab308; } .template-velvet .author-badge::before { border-color: #eab308; } .template-velvet .badge-text-content { color: #fde047; }
-        /* إخفاء للبطاقات */
-        .template-card-note .author-badge, .template-card-alert .author-badge, .template-card-wisdom .author-badge, .template-card-cinematic .author-badge { display: none; }
+        .template-leather .author-badge { background: #3e2723; border-color: #ffb300; } .template-leather .badge-text-content { color: #ffb300; }
+        .template-ocean .author-badge { background: #004d40; border-color: #80cbc4; } .template-ocean .badge-text-content { color: #80cbc4; }
+        .template-poetry .author-badge { background: #faf7f2; border-color: #8b6d3b; border-radius: 5px; } .template-poetry .author-badge::before{display:none;} .template-poetry .badge-text-content { color: #8b6d3b; }
+        .template-red .author-badge { background: #881337; border-color: #fca5a5; } .template-red .badge-text-content { color: #fca5a5; }
+        
+        /* إخفاء البطاقات */
+        .template-card-note .author-badge, .template-card-alert .author-badge, .template-card-wisdom .author-badge, .template-card-cinematic .author-badge, .template-card-news .author-badge, .template-card-minimal .author-badge, .template-card-greeting .author-badge { display: none; }
 
         [contenteditable="true"] { outline: none; cursor: text; }
         [contenteditable="true"]:empty:before { content: attr(data-placeholder); color: #aaa; font-style: italic; opacity: 0.6; }
@@ -305,7 +325,15 @@
         .document-body img { max-width: 100%; height: auto; border-radius: 8px; margin: 15px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         .document-body ul, .document-body ol { padding-right: 20px; margin-bottom: 15px; }
 
-        .document-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; padding-top: 20px; border-top: 1px dashed rgba(197, 160, 89, 0.4); transition: all 0.5s ease; width: 100%; box-sizing: border-box; }
+        /* تعديل التذييل ليكون مرتفعاً لتجنب التداخل مع الإطارات */
+        .document-footer { 
+            margin-top: auto; 
+            margin-bottom: 25px; /* تم الرفع للأعلى بزيادة لضمان عدم ملامسة الإطارات العريضة كالزخرفة الأندلسية */
+            display: flex; justify-content: space-between; align-items: center; 
+            padding-top: 20px; border-top: 1px dashed rgba(197, 160, 89, 0.4); 
+            transition: all 0.5s ease; width: 100%; box-sizing: border-box; 
+            position: relative; z-index: 30; 
+        }
         .social-handle { display: flex; align-items: center; gap: 8px; font-family: 'Tajawal', sans-serif; font-size: 1.1rem; color: var(--dark-gold); opacity: 0.8; transition: all 0.5s ease; }
         .social-handle span { border-bottom: 1px solid transparent; } .social-handle span:focus { border-bottom: 1px dashed currentColor; }
         .signature-box { display: flex; align-items: center; gap: 15px; font-family: 'Amiri', serif; font-size: 1.5rem; color: var(--dark-gold); transition: all 0.5s ease; }
@@ -324,14 +352,10 @@
         /* التجاوب مع الشاشات (الموبايل) */
         @media (max-width: 1050px) {
             .studio-layout { flex-direction: column; align-items: center; gap: 15px; }
-            /* تحويل اللوحات الجانبية لشريط تمرير أفقي أسفل شريط الأدوات */
-            .sidebar {
-                width: 100%; flex-direction: row; position: relative; top: 0; max-height: 80px;
-                overflow-x: auto; overflow-y: hidden; padding-bottom: 10px;
-            }
+            .sidebar { width: 100%; flex-direction: row; position: relative; top: 0; max-height: 80px; overflow-x: auto; overflow-y: hidden; padding-bottom: 10px; }
             .sidebar::-webkit-scrollbar { height: 4px; }
             .template-thumb { min-width: 150px; height: 50px; }
-            .category-title { display: none; } /* إخفاء العناوين في الموبايل لتوفير المساحة */
+            .category-title { display: none; } 
             .paper-container { transform: scale(0.95); transform-origin: top center; }
         }
         @media (max-width: 600px) {
@@ -340,6 +364,30 @@
             .document-footer { flex-direction: column-reverse; gap: 15px; align-items: center; }
             .badge-right, .badge-left { transform: scale(0.7); }
             .badge-right { right: 5px; top: 5px; } .badge-left { left: 5px; top: 5px; }
+        }
+
+        /* --- إعدادات الطباعة المخصصة (جديد) --- */
+        @media print {
+            @page { size: auto; margin: 0mm; }
+            body { background: none; background-image: none; }
+            #toolbar, .sidebar, #loading-overlay, #imageUpload { display: none !important; }
+            .studio-layout { display: block; margin: 0; padding: 0; width: 100%; max-width: none; }
+            .main-editor-area { display: block; width: 100%; padding: 0; margin: 0; }
+            .paper-container { 
+                box-shadow: none !important; margin: 0 auto !important; padding: 40px !important; 
+                transform: none !important; width: 100% !important; max-width: 100% !important; min-height: auto !important; 
+            }
+            /* إخفاء النصوص الإرشادية الباهتة عند الطباعة */
+            [contenteditable="true"]:empty:before { content: '' !important; display: none !important; }
+            /* إجبار المتصفح على طباعة الألوان والخلفيات بدقة */
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+        }
+
+        /* كلاس ذكي لإخفاء النصوص الإرشادية الباهتة أثناء حفظ الصورة أو المشاركة */
+        body.exporting-mode [contenteditable="true"]:empty:before {
+            content: '' !important;
+            display: none !important;
+            opacity: 0 !important;
         }
     </style>
 </head>
@@ -350,7 +398,6 @@
     <!-- شريط الأدوات العلوي -->
     <div class="toolbar" id="toolbar">
         
-        <!-- التبديل بين الأوراق والبطاقات -->
         <select class="select-styled" id="categorySwitch" onchange="switchCategory(this.value)" title="تغيير القسم الأساسي" style="background-color: var(--primary-gold); color: white; border-color: var(--dark-gold);">
             <option value="papers">قسم الأوراق والمقالات</option>
             <option value="cards">قسم البطاقات والاقتباسات</option>
@@ -381,7 +428,6 @@
         
         <div class="divider"></div>
         
-        <!-- أزرار التراجع والإعادة (جديد) -->
         <button class="tool-btn" onclick="formatDoc('undo')" title="تراجع"><i class="fas fa-undo"></i></button>
         <button class="tool-btn" onclick="formatDoc('redo')" title="إعادة"><i class="fas fa-redo"></i></button>
         
@@ -412,9 +458,8 @@
         
         <div class="divider"></div>
 
-        <!-- أزرار ملء الشاشة والطباعة (جديد) -->
         <button class="tool-btn" onclick="toggleFullScreen()" title="ملء الشاشة لكتابة بلا مشتتات"><i class="fas fa-expand"></i></button>
-        <button class="tool-btn" onclick="window.print()" title="طباعة الورقة"><i class="fas fa-print"></i></button>
+        <button class="tool-btn" onclick="window.print()" title="طباعة الورقة المباشرة"><i class="fas fa-print"></i></button>
         
         <button class="clear-btn" onclick="clearDocument()"><i class="fas fa-trash-alt"></i></button>
         <button class="export-btn share-btn" onclick="shareImage()"><i class="fas fa-share-nodes"></i> مشاركة</button>
@@ -425,9 +470,7 @@
     <div class="studio-layout">
         
         <!-- اللوحة الجانبية اليمنى -->
-        <div class="sidebar" id="sidebar-right">
-            <!-- سيتم تعبئتها بالجافاسكربت -->
-        </div>
+        <div class="sidebar" id="sidebar-right"></div>
 
         <!-- منطقة الورقة في المنتصف -->
         <div class="main-editor-area">
@@ -459,9 +502,7 @@
         </div>
 
         <!-- اللوحة الجانبية اليسرى -->
-        <div class="sidebar" id="sidebar-left">
-             <!-- سيتم تعبئتها بالجافاسكربت -->
-        </div>
+        <div class="sidebar" id="sidebar-left"></div>
 
     </div>
 
@@ -471,26 +512,33 @@
     </div>
 
     <script>
-        // بيانات القوالب لتعبئة اللوحات الجانبية
+        // مضاعفة عدد القوالب لكل قسم (حوالي 11 ورقة و 8 بطاقات)
         const templatesData = {
             papers: [
                 { id: 'template-haramain', name: 'الحرمين (أخضر وذهبي)', class: 'thumb-haramain', icon: 'fa-kaaba', side: 'right' },
                 { id: 'template-university', name: 'الجامعة (رسمي)', class: 'thumb-university', icon: 'fa-graduation-cap', side: 'right' },
                 { id: 'template-islamic', name: 'الزخرفة الأندلسية', class: 'thumb-islamic', icon: 'fa-book-open', side: 'right' },
+                { id: 'template-ocean', name: 'أعماق المحيط', class: 'thumb-ocean', icon: 'fa-water', side: 'right' },
+                { id: 'template-poetry', name: 'أبيات الشعر', class: 'thumb-poetry', icon: 'fa-pen-fancy', side: 'right' },
                 { id: 'template-royal', name: 'الملكية الفاخرة', class: 'thumb-royal', icon: 'fa-leaf', side: 'left' },
                 { id: 'template-personal', name: 'الهوية الشخصية', class: 'thumb-personal', icon: 'fa-user-tie', side: 'left' },
                 { id: 'template-velvet', name: 'المخملية الليلية', class: 'thumb-velvet', icon: 'fa-crown', side: 'left' },
-                { id: 'template-vintage', name: 'المخطوطة القديمة', class: 'thumb-vintage', icon: 'fa-feather-alt', side: 'left' }
+                { id: 'template-vintage', name: 'المخطوطة القديمة', class: 'thumb-vintage', icon: 'fa-feather-alt', side: 'left' },
+                { id: 'template-leather', name: 'الجلد الفاخر', class: 'thumb-leather', icon: 'fa-book', side: 'left' },
+                { id: 'template-red', name: 'القطيفة الحمراء', class: 'thumb-red', icon: 'fa-gem', side: 'left' }
             ],
             cards: [
                 { id: 'template-square', name: 'مربع الاقتباسات', class: 'thumb-square', icon: 'fa-quote-right', side: 'right' },
                 { id: 'template-card-wisdom', name: 'بطاقة حكمة', class: 'thumb-wisdom', icon: 'fa-star-and-crescent', side: 'right' },
+                { id: 'template-card-news', name: 'خبر عاجل', class: 'thumb-news', icon: 'fa-bolt', side: 'right' },
+                { id: 'template-card-greeting', name: 'بطاقة تهنئة', class: 'thumb-greeting', icon: 'fa-moon', side: 'right' },
                 { id: 'template-card-cinematic', name: 'البطاقة السينمائية', class: 'thumb-cinematic', icon: 'fa-film', side: 'left' },
-                { id: 'template-card-alert', name: 'تنبيه عاجل', class: 'thumb-alert', icon: 'fa-bell', side: 'left' }
+                { id: 'template-card-alert', name: 'تنبيه عاجل', class: 'thumb-alert', icon: 'fa-bell', side: 'left' },
+                { id: 'template-card-note', name: 'ملاحظة لاصقة', class: 'thumb-note', icon: 'fa-pen-nib', side: 'left' },
+                { id: 'template-card-minimal', name: 'اقتباس نقي', class: 'thumb-minimal', icon: 'fa-comment', side: 'left' }
             ]
         };
 
-        // دالة تبديل الفئة (أوراق / بطاقات) ورسم الأزرار الجانبية
         function switchCategory(category) {
             const rightSidebar = document.getElementById('sidebar-right');
             const leftSidebar = document.getElementById('sidebar-left');
@@ -506,32 +554,25 @@
                 else leftSidebar.innerHTML += btnHTML;
             });
 
-            // تفعيل أول قالب تلقائياً عند تبديل الفئة
             const firstTemplate = templatesData[category][0];
             applyTemplate(firstTemplate.id, firstTemplate.icon);
         }
 
-        // تطبيق القالب عند الضغط عليه
         function applyTemplate(templateId, iconClass) {
             const paper = document.getElementById('paper-capture');
             const dividerIcon = document.getElementById('divider-icon');
 
-            // إزالة الكلاسات السابقة للقوالب
             paper.className = 'paper-container';
-            // إضافة القالب الجديد
             paper.classList.add(templateId);
             paper.style.backgroundColor = '';
 
-            // تغيير الأيقونة أسفل العنوان
             if(dividerIcon) dividerIcon.className = 'fas ' + iconClass;
 
-            // تمييز الزر المضغوط في الجوانب
             document.querySelectorAll('.template-thumb').forEach(btn => btn.classList.remove('active'));
             const activeBtn = document.getElementById('btn-' + templateId);
             if(activeBtn) activeBtn.classList.add('active');
         }
 
-        // التنسيقات العامة
         function formatDoc(cmd, value=null) {
             if (cmd === 'hiliteColor' && !document.queryCommandSupported('hiliteColor')) cmd = 'backColor'; 
             document.execCommand(cmd, false, value);
@@ -572,16 +613,11 @@
             document.getElementById('paper-capture').style.backgroundColor = color;
         }
 
-        // دالة ملء الشاشة (جديدة)
         function toggleFullScreen() {
             if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen().catch(err => {
-                    console.log(`Error attempting to enable fullscreen: ${err.message}`);
-                });
+                document.documentElement.requestFullscreen().catch(err => { console.log(err); });
             } else {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                }
+                if (document.exitFullscreen) document.exitFullscreen();
             }
         }
 
@@ -589,75 +625,67 @@
             const paper = document.getElementById('paper-capture');
             const overlay = document.getElementById('loading-overlay');
             
-            // التسمية الذكية (تأخذ العنوان المكتوب ليكون اسم الملف)
             let docTitle = document.getElementById('docTitle').innerText.trim();
             if(!docTitle) docTitle = 'لوحة_احترافية';
 
             overlay.style.display = 'flex';
+            
+            // تفعيل الكلاس الذكي لإخفاء النصوص الإرشادية الفارغة قبل التصوير
+            document.body.classList.add('exporting-mode');
 
             document.fonts.ready.then(() => {
                 html2canvas(paper, { scale: 2, useCORS: true, backgroundColor: null }).then(canvas => {
+                    document.body.classList.remove('exporting-mode'); // إرجاعها بعد التصوير
                     overlay.style.display = 'none';
                     const link = document.createElement('a');
-                    link.download = docTitle + '.png'; // استخدام التسمية الذكية هنا
+                    link.download = docTitle + '.png'; 
                     link.href = canvas.toDataURL("image/png");
                     link.click();
                 }).catch(err => {
+                    document.body.classList.remove('exporting-mode');
                     overlay.style.display = 'none';
                     alert("حدث خطأ أثناء التصوير.");
                 });
             });
         }
 
-        // دالة المشاركة المباشرة
         function shareImage() {
             const paper = document.getElementById('paper-capture');
             const overlay = document.getElementById('loading-overlay');
             
-            // التسمية الذكية للمشاركة أيضاً
             let docTitle = document.getElementById('docTitle').innerText.trim();
             if(!docTitle) docTitle = 'لوحة_احترافية';
 
             overlay.style.display = 'flex';
 
+            // تفعيل الكلاس الذكي لإخفاء النصوص الإرشادية الفارغة قبل التصوير
+            document.body.classList.add('exporting-mode');
+
             document.fonts.ready.then(() => {
                 html2canvas(paper, { scale: 2, useCORS: true, backgroundColor: null }).then(canvas => {
-                    // تحويل الصورة إلى ملف لكي تقبلها تطبيقات الجوال
+                    document.body.classList.remove('exporting-mode'); // إرجاعها بعد التصوير
                     canvas.toBlob(function(blob) {
                         const file = new File([blob], docTitle + ".png", { type: "image/png" });
-                        
-                        // التحقق مما إذا كان المتصفح يدعم ميزة المشاركة المباشرة
                         if (navigator.canShare && navigator.canShare({ files: [file] })) {
-                            navigator.share({
-                                title: docTitle,
-                                text: 'تم التصميم عبر استوديو النشر الفاخر',
-                                files: [file]
-                            }).then(() => {
-                                overlay.style.display = 'none';
-                            }).catch((error) => {
-                                overlay.style.display = 'none';
-                                console.log('تم إلغاء المشاركة', error);
-                            });
+                            navigator.share({ title: docTitle, text: 'تم التصميم عبر استوديو النشر الفاخر', files: [file] })
+                            .then(() => { overlay.style.display = 'none'; })
+                            .catch((error) => { overlay.style.display = 'none'; console.log('تم إلغاء', error); });
                         } else {
-                            // إذا كان المتصفح لا يدعم، يتم تحميل الصورة كبديل احتياطي
                             overlay.style.display = 'none';
                             alert("متصفحك لا يدعم المشاركة المباشرة، سيتم تحميل الصورة بدلاً من ذلك.");
-                            const link = document.createElement('a');
-                            link.download = docTitle + '.png';
-                            link.href = canvas.toDataURL("image/png");
-                            link.click();
+                            const link = document.createElement('a'); link.download = docTitle + '.png'; link.href = canvas.toDataURL("image/png"); link.click();
                         }
                     }, 'image/png');
-                }).catch(err => {
-                    overlay.style.display = 'none';
-                    alert("حدث خطأ أثناء التجهيز للمشاركة.");
+                }).catch(err => { 
+                    document.body.classList.remove('exporting-mode');
+                    overlay.style.display = 'none'; 
+                    alert("خطأ."); 
                 });
             });
         }
 
-        // التهيئة عند فتح الصفحة
         window.onload = function() { 
-            switchCategory('papers'); // تحميل فئة الأوراق أولاً
+            switchCategory('papers'); 
             document.getElementById('docTitle').focus(); 
         };
     </script>
