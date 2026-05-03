@@ -3,354 +3,340 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>قالب النشر الفاخر | الإصدار الذهبي</title>
+    <title>استوديو النشر الفاخر | الإصدار الاحترافي</title>
     
-    <!-- استدعاء الخطوط العربية الفاخرة وتوسيعها -->
+    <!-- الخطوط -->
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Tajawal:wght@400;500;700;800&family=Cairo:wght@400;600;700&family=Changa:wght@400;600&family=Lateef:wght@400;500;600&family=Aref+Ruqaa:wght@400;700&family=Reem+Kufi:wght@400;600&display=swap" rel="stylesheet">
     
-    <!-- مكتبة الأيقونات -->
+    <!-- الأيقونات -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- مكتبة تحويل الورقة إلى صورة -->
+    <!-- مكتبة التصوير -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <style>
         :root {
             --primary-gold: #c5a059;
             --dark-gold: #8b6d3b;
-            --paper-bg: #f4f5f7; 
+            --paper-bg: #fdfbf7; 
             --text-dark: #2c3e50;
-            --bg-dark: #121418;
+            --bg-dark: #0f1216; /* لون خلفية الاستوديو */
         }
 
         body {
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             background-color: var(--bg-dark);
-            background-image: radial-gradient(circle at center, #232830 0%, #121418 100%);
+            background-image: radial-gradient(circle at top, #1e242b 0%, #0f1216 100%);
             font-family: 'Tajawal', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
             color: var(--text-dark);
+            overflow-x: hidden;
         }
 
-        /* شريط الأدوات (Toolbar) المحسن */
+        /* شريط الأدوات العلوي */
         .toolbar {
-            background: rgba(255, 255, 255, 0.98);
-            padding: 15px 25px;
-            border-radius: 15px; /* تغيير الدوران ليكون أكثر احترافية وحداثة */
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-            display: flex;
-            gap: 10px;
-            margin: 20px 0;
-            position: sticky;
-            top: 15px;
-            z-index: 100;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 12px 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: flex; gap: 8px; margin: 15px auto;
+            position: sticky; top: 15px; z-index: 100;
             border-bottom: 3px solid var(--primary-gold);
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            max-width: 95%;
+            flex-wrap: wrap; justify-content: center; align-items: center;
+            width: 95%; max-width: 1200px;
+            backdrop-filter: blur(10px);
         }
 
         .tool-btn {
-            background: none;
-            border: 1px solid transparent;
-            color: var(--text-dark);
-            font-size: 1.1rem;
-            cursor: pointer;
-            width: 38px;
-            height: 38px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
+            background: none; border: 1px solid transparent; color: var(--text-dark);
+            font-size: 1.1rem; cursor: pointer; width: 36px; height: 36px;
+            border-radius: 6px; display: flex; align-items: center; justify-content: center; transition: all 0.2s;
         }
+        .tool-btn:hover { background: #f1f5f9; border-color: var(--primary-gold); color: var(--dark-gold); }
+        .highlight-btn { color: #ca8a04; } .highlight-btn:hover { background: #fef08a; border-color: #ca8a04; }
 
-        .tool-btn:hover {
-            background: var(--paper-bg);
-            border-color: var(--primary-gold);
-            color: var(--dark-gold);
-            transform: translateY(-2px);
-        }
-        
-        .highlight-btn { color: #ca8a04; }
-        .highlight-btn:hover { background: #fef08a; border-color: #ca8a04; }
-
-        .color-picker {
-            width: 30px; height: 30px; border: none; border-radius: 5px; cursor: pointer; padding: 0;
-        }
-        .color-picker::-webkit-color-swatch-wrapper { padding: 0; }
-        .color-picker::-webkit-color-swatch { border: none; border-radius: 5px; }
-
-        .color-picker-group {
-            display: flex; align-items: center; gap: 8px; color: var(--text-dark); font-size: 1.1rem;
-            background: rgba(0,0,0,0.04); padding: 5px 10px; border-radius: 8px; border: 1px solid #e2e8f0;
-        }
-
-        .divider { width: 1px; background: #cbd5e1; margin: 0 5px; height: 30px; }
+        .divider { width: 1px; background: #cbd5e1; margin: 0 4px; height: 25px; }
 
         .export-btn {
             background: linear-gradient(135deg, var(--primary-gold), var(--dark-gold));
-            color: white; border: none; padding: 0 25px; height: 42px; border-radius: 8px;
-            font-family: 'Tajawal', sans-serif; font-weight: 700; font-size: 1.1rem; cursor: pointer;
-            display: flex; align-items: center; gap: 8px; transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(197, 160, 89, 0.4);
+            color: white; border: none; padding: 0 20px; height: 38px; border-radius: 6px;
+            font-family: 'Tajawal', sans-serif; font-weight: bold; font-size: 1rem; cursor: pointer;
+            display: flex; align-items: center; gap: 8px; transition: all 0.3s;
         }
-        .export-btn:hover { transform: scale(1.03); box-shadow: 0 6px 20px rgba(197, 160, 89, 0.6); }
+        .export-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(197, 160, 89, 0.5); }
         
+        /* زر المشاركة (جديد) */
+        .share-btn {
+            background: linear-gradient(135deg, #0ea5e9, #0369a1); /* لون أزرق أنيق */
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.4);
+        }
+        .share-btn:hover { box-shadow: 0 6px 20px rgba(14, 165, 233, 0.6); }
+
         .clear-btn {
-            background: transparent; color: #ef4444; border: 1px solid #fca5a5; padding: 0 15px; height: 42px;
-            border-radius: 8px; font-family: 'Tajawal', sans-serif; font-weight: bold; cursor: pointer; transition: all 0.3s;
+            background: transparent; color: #ef4444; border: 1px solid #fca5a5; padding: 0 15px; height: 38px;
+            border-radius: 6px; font-family: 'Tajawal', sans-serif; font-weight: bold; cursor: pointer; transition: 0.3s;
         }
         .clear-btn:hover { background: #fef2f2; }
 
-        /* القوائم المنسدلة */
-        .template-select {
-            padding: 8px 12px; border-radius: 8px; border: 1px solid #cbd5e1; background: #f8fafc;
-            color: var(--text-dark); font-family: 'Tajawal', sans-serif; font-weight: bold; cursor: pointer;
-            outline: none; transition: all 0.3s; height: 40px;
+        .select-styled {
+            padding: 6px 10px; border-radius: 6px; border: 1px solid #cbd5e1; background: #f8fafc;
+            color: var(--text-dark); font-family: 'Tajawal', sans-serif; font-weight: bold; cursor: pointer; outline: none;
         }
-        .template-select:hover, .template-select:focus { border-color: var(--primary-gold); box-shadow: 0 0 0 2px rgba(197, 160, 89, 0.2); }
 
-        /* حاوية الورقة الأساسية */
+        /* --- نظام الاستوديو (اللوحات الجانبية والورقة) --- */
+        .studio-layout {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            gap: 30px;
+        }
+
+        /* اللوحات الجانبية للقوالب */
+        .sidebar {
+            width: 220px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            position: sticky;
+            top: 90px;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+            padding-right: 5px; /* لشريط التمرير */
+        }
+        
+        /* إخفاء شريط التمرير الجمالي */
+        .sidebar::-webkit-scrollbar { width: 4px; }
+        .sidebar::-webkit-scrollbar-thumb { background: rgba(197, 160, 89, 0.5); border-radius: 10px; }
+
+        .category-title {
+            color: #cbd5e1;
+            font-family: 'Amiri', serif;
+            font-size: 1.2rem;
+            text-align: center;
+            margin-bottom: 10px;
+            border-bottom: 1px dashed rgba(203, 213, 225, 0.3);
+            padding-bottom: 5px;
+        }
+
+        /* زر القالب المصغر (Thumbnail) */
+        .template-thumb {
+            width: 100%;
+            height: 60px;
+            border-radius: 8px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .template-thumb:hover { transform: scale(1.05); }
+        .template-thumb.active { border-color: white; box-shadow: 0 0 15px rgba(197, 160, 89, 0.8); transform: scale(1.05); }
+
+        /* منطقة الورقة الأساسية */
+        .main-editor-area {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            min-width: 0; /* لمنع تجاوز العرض */
+        }
+
         .paper-container {
             width: 100%; position: relative; margin-bottom: 60px; padding: 40px; box-sizing: border-box;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.7); transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            /* خصائص التموج الافتراضي */
+            box-shadow: 0 25px 60px rgba(0,0,0,0.8); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             background-color: var(--paper-bg);
         }
 
-        /* --- القوالب الأصلية والجديدة --- */
-
-        /* 1. القالب الملكي (الافتراضي) */
+        /* --- أنماط القوالب (Thumbnails + Paper) --- */
+        
+        /* 1. الملكي */
+        .thumb-royal { background: #fdfbf7; color: #8b6d3b; border: 1px solid #c5a059; }
         .template-royal { max-width: 794px; min-height: 1123px; color: var(--text-dark); }
         
-        /* 2. الورقة المخملية (أسود وذهبي - جديد فائق الفخامة) */
-        .template-velvet {
-            max-width: 794px; min-height: 1123px; background-color: #0a0a0a; color: #facc15;
-        }
-        .template-velvet .document-title { color: #fde047; text-shadow: 0 2px 10px rgba(250, 204, 21, 0.3); }
-        .template-velvet .document-body { color: #fef08a; }
-        .template-velvet .ornate-border { border: 2px solid #eab308; box-shadow: inset 0 0 20px rgba(234, 179, 8, 0.2); }
-        .template-velvet .ornate-border::before { border: 1px solid #a16207; margin: 4px; }
-        .template-velvet .corner { border-color: #facc15; width: 50px; height: 50px; }
-        .template-velvet .title-divider::before, .template-velvet .title-divider::after { background: #eab308; box-shadow: 0 0 5px #eab308; }
-        .template-velvet .title-divider i { color: #facc15; text-shadow: 0 0 10px #eab308; }
-        .template-velvet .signature-box, .template-velvet .social-handle { color: #fde047; }
-        .template-velvet .document-footer { border-top-color: rgba(234, 179, 8, 0.3); }
+        /* 2. الحرمين (جديد) */
+        .thumb-haramain { background: #0b3d2c; color: #d4af37; border: 1px solid #d4af37; }
+        .template-haramain { max-width: 794px; min-height: 1123px; background-color: #0b3d2c; color: #fdfbf7; }
+        .template-haramain .document-title { color: #d4af37; font-family: 'Amiri', serif; }
+        .template-haramain .document-body { color: #fdfbf7; }
+        .template-haramain .ornate-border { border: 4px solid #d4af37; border-radius: 5px; }
+        .template-haramain .ornate-border::before { border: 1px solid #d4af37; margin: 4px; opacity: 0.8; }
+        .template-haramain .corner { border-color: #d4af37; border-radius: 50%; width: 30px; height: 30px; }
+        .template-haramain .title-divider::before, .template-haramain .title-divider::after { background: #d4af37; }
+        .template-haramain .title-divider i { color: #d4af37; }
+        .template-haramain .signature-box, .template-haramain .social-handle { color: #d4af37; }
+        .template-haramain .signature-icon { color: #d4af37; }
+        .template-haramain .document-footer { border-top-color: rgba(212, 175, 55, 0.3); }
 
-        /* 3. الورقة الأكاديمية (بسيط وحديث - جديد) */
-        .template-minimalist {
-            max-width: 794px; min-height: 1123px; background-color: #ffffff; color: #1e293b;
-        }
-        .template-minimalist .document-title { color: #0f172a; font-family: 'Tajawal', sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
-        .template-minimalist .document-body { color: #334155; }
-        .template-minimalist .ornate-border { border: 1px solid #e2e8f0; top: 30px; bottom: 30px; left: 30px; right: 30px; }
-        .template-minimalist .ornate-border::before { display: none; }
-        .template-minimalist .corner { display: none; }
-        .template-minimalist .title-divider::before, .template-minimalist .title-divider::after { background: #94a3b8; height: 1px; width: 50px; }
-        .template-minimalist .title-divider i { color: #64748b; font-size: 1rem; }
-        .template-minimalist .signature-box, .template-minimalist .social-handle { color: #475569; font-family: 'Tajawal', sans-serif; }
-        .template-minimalist .document-footer { border-top-color: #f1f5f9; }
+        /* 3. الجامعة الإسلامية (جديد) */
+        .thumb-university { background: #ffffff; color: #166534; border-top: 5px solid #166534; }
+        .template-university { max-width: 794px; min-height: 1123px; background-color: #ffffff; color: #1e293b; }
+        .template-university .document-title { color: #166534; font-family: 'Tajawal', sans-serif; font-weight: 800; border-bottom: 2px solid #166534; padding-bottom: 10px; display: inline-block; }
+        .template-university .document-body { color: #334155; text-align: justify; }
+        .template-university .ornate-border { border: 2px solid #166534; top: 15px; bottom: 15px; left: 15px; right: 15px; }
+        .template-university .ornate-border::before { display: none; }
+        .template-university .corner { display: none; }
+        .template-university .title-divider { display: none; }
+        .template-university .signature-box, .template-university .social-handle { color: #166534; }
+        .template-university .signature-icon { display: none; }
+        .template-university .document-footer { border-top: 1px solid #cbd5e1; }
 
-        /* 4. القالب الإسلامي (مطابق لصورة المستخدم) */
-        .template-islamic {
-            max-width: 794px; min-height: 1123px; background-color: #ffffff; color: #0F4435; 
-        }
+        /* 4. الهوية الشخصية (جديد) */
+        .thumb-personal { background: #0f172a; color: #e2e8f0; border-left: 5px solid #c5a059; }
+        .template-personal { max-width: 794px; min-height: 1123px; background-color: #0f172a; color: #f8fafc; }
+        .template-personal .document-title { color: #c5a059; text-align: right; font-family: 'Cairo', sans-serif; }
+        .template-personal .document-body { color: #cbd5e1; }
+        .template-personal .ornate-border { border-right: 4px solid #c5a059; border-top: none; border-bottom: none; border-left: none; left: auto; right: 20px; top: 0; bottom: 0; }
+        .template-personal .ornate-border::before { display: none; }
+        .template-personal .corner { display: none; }
+        .template-personal .title-divider { justify-content: flex-start; margin-right: 20px; }
+        .template-personal .title-divider::before { display: none; } .template-personal .title-divider::after { width: 200px; background: #c5a059; margin-right: 10px; }
+        .template-personal .title-divider i { color: #c5a059; font-size: 1rem; }
+        .template-personal .signature-box, .template-personal .social-handle { color: #94a3b8; }
+        .template-personal .signature-icon { color: #c5a059; }
+        .template-personal .document-footer { border-top: none; }
+
+        /* 5. الإسلامية الأصلية (صورة المستخدم) */
+        .thumb-islamic { background: #ffffff; color: #0F4435; border: 2px solid #0F4435; }
+        .template-islamic { max-width: 794px; min-height: 1123px; background-color: #ffffff; color: #0F4435; }
         .template-islamic .document-title { color: #0F4435; font-family: 'Amiri', serif; }
-        .template-islamic .document-body { color: #0F4435; font-weight: 500; }
         .template-islamic .ornate-border { border: 18px solid #0F4435; border-radius: 10px; }
         .template-islamic .ornate-border::before { border: 2px dashed #C4A265; top: 5px; bottom: 5px; left: 5px; right: 5px; opacity: 1; }
         .template-islamic .corner { display: none; } 
         .template-islamic .title-divider::before, .template-islamic .title-divider::after { background: #C4A265; height: 1px; } 
         .template-islamic .title-divider i { color: #0F4435; }
-        .template-islamic .signature-box, .template-islamic .social-handle { color: #0F4435; }
-        .template-islamic .signature-icon { color: #C4A265; }
+        .template-islamic .signature-box, .template-islamic .social-handle { color: #0F4435; } .template-islamic .signature-icon { color: #C4A265; }
         .template-islamic .document-footer { border-top: 1px solid rgba(196, 162, 101, 0.3); }
 
-        /* 5. المخطوطة الكلاسيكية (ورق قديم) */
+        /* 6. المخملية */
+        .thumb-velvet { background: #0a0a0a; color: #facc15; border: 1px solid #a16207; }
+        .template-velvet { max-width: 794px; min-height: 1123px; background-color: #0a0a0a; color: #facc15; }
+        .template-velvet .document-title { color: #fde047; text-shadow: 0 2px 10px rgba(250, 204, 21, 0.3); } .template-velvet .document-body { color: #fef08a; }
+        .template-velvet .ornate-border { border: 2px solid #eab308; box-shadow: inset 0 0 20px rgba(234, 179, 8, 0.2); } .template-velvet .ornate-border::before { border: 1px solid #a16207; margin: 4px; }
+        .template-velvet .corner { border-color: #facc15; width: 50px; height: 50px; } .template-velvet .title-divider::before, .template-velvet .title-divider::after { background: #eab308; box-shadow: 0 0 5px #eab308; }
+        .template-velvet .title-divider i { color: #facc15; text-shadow: 0 0 10px #eab308; } .template-velvet .signature-box, .template-velvet .social-handle { color: #fde047; } .template-velvet .document-footer { border-top-color: rgba(234, 179, 8, 0.3); }
+
+        /* 7. المخطوطة */
+        .thumb-vintage { background: #fdf6e3; color: #5d4037; border: 1px solid #795548; }
         .template-vintage { max-width: 750px; min-height: 1000px; background-color: #fdf6e3; color: #3e2723; }
         .template-vintage .document-title { color: #5d4037; } .template-vintage .document-body { color: #4e342e; }
-        .template-vintage .ornate-border { border: 3px double #795548; border-radius: 0; }
-        .template-vintage .ornate-border::before { display: none; } .template-vintage .corner { display: none; }
+        .template-vintage .ornate-border { border: 3px double #795548; border-radius: 0; } .template-vintage .ornate-border::before { display: none; } .template-vintage .corner { display: none; }
         .template-vintage .title-divider::before, .template-vintage .title-divider::after { height: 4px; border-top: 1px solid #795548; border-bottom: 1px solid #795548; background: transparent; }
-        .template-vintage .title-divider i { color: #795548; } .template-vintage .signature-box, .template-vintage .social-handle { color: #5d4037; }
-        .template-vintage .signature-icon { color: #795548; } .template-vintage .document-footer { border-top-color: rgba(121, 85, 72, 0.3); }
+        .template-vintage .title-divider i { color: #795548; } .template-vintage .signature-box, .template-vintage .social-handle { color: #5d4037; } .template-vintage .document-footer { border-top-color: rgba(121, 85, 72, 0.3); }
 
-        /* 6. الزمردي الفاخر */
-        .template-emerald { max-width: 794px; min-height: 1123px; background-color: #064e3b; color: #ecfdf5; }
-        .template-emerald .document-title { color: #fbbf24; } .template-emerald .document-body { color: #d1fae5; }
-        .template-emerald .ornate-border { border: 2px solid #fbbf24; border-radius: 25px; }
-        .template-emerald .ornate-border::before { border: 1px dashed #fcd34d; border-radius: 20px; } .template-emerald .corner { display: none; }
-        .template-emerald .title-divider::before, .template-emerald .title-divider::after { background: transparent; border-top: 2px dashed #fbbf24; }
-        .template-emerald .title-divider i { color: #fbbf24; } .template-emerald .signature-box, .template-emerald .social-handle { color: #fbbf24; }
-        .template-emerald .signature-icon { color: #fcd34d; } .template-emerald .document-footer { border-top-color: rgba(251, 191, 36, 0.3); }
-
-        /* 7. الياقوتي */
-        .template-sapphire { max-width: 794px; min-height: 1123px; background-color: #0f172a; color: #f8fafc; }
-        .template-sapphire .document-title { color: #cbd5e1; } .template-sapphire .document-body { color: #e2e8f0; }
-        .template-sapphire .ornate-border { border: 4px double #94a3b8; border-radius: 0; }
-        .template-sapphire .ornate-border::before { border: 1px solid #cbd5e1; margin: 5px; opacity: 0.3; } .template-sapphire .corner { border-color: #cbd5e1; width: 30px; height: 30px; }
-        .template-sapphire .title-divider::before, .template-sapphire .title-divider::after { background: #94a3b8; } .template-sapphire .title-divider i { color: #94a3b8; }
-        .template-sapphire .signature-box, .template-sapphire .social-handle { color: #cbd5e1; } .template-sapphire .signature-icon { color: #94a3b8; } .template-sapphire .document-footer { border-top-color: rgba(148, 163, 184, 0.3); }
-
-        /* 8. الوردي الحالم */
-        .template-rose { max-width: 794px; min-height: 1123px; background-color: #fff1f2; color: #4c0519; }
-        .template-rose .document-title { color: #9f1239; } .template-rose .document-body { color: #881337; }
-        .template-rose .ornate-border { border: 3px solid #fda4af; border-radius: 40px; } .template-rose .ornate-border::before { display: none; } .template-rose .corner { display: none; }
-        .template-rose .title-divider::before, .template-rose .title-divider::after { background: transparent; border-top: 2px dotted #fda4af; } .template-rose .title-divider i { color: #f43f5e; }
-        .template-rose .signature-box, .template-rose .social-handle { color: #9f1239; } .template-rose .signature-icon { color: #f43f5e; } .template-rose .document-footer { border-top-color: rgba(253, 164, 175, 0.5); }
-
-        /* 9. مربع الاقتباسات */
+        /* --- البطاقات --- */
+        .thumb-square { background: #1e293b; color: #fbbf24; }
         .template-square { max-width: 650px; min-height: 650px; background: linear-gradient(135deg, #1e293b, #0f172a); color: #f8fafc; }
         .template-square .content-area { justify-content: center; } .template-square .document-body { flex-grow: 0; text-align: center; font-size: 1.6rem; }
         .template-square .document-title { color: #fbbf24; } .template-square .ornate-border { border: 2px dashed rgba(251, 191, 36, 0.5); } .template-square .ornate-border::before { display: none; } .template-square .corner { border-color: #fbbf24; }
-        .template-square .title-divider::before, .template-square .title-divider::after { display: none; } .template-square .title-divider i { color: #fbbf24; font-size: 2rem; }
-        .template-square .signature-box, .template-square .social-handle { color: #fbbf24; } .template-square .document-footer { border-top-color: rgba(251, 191, 36, 0.2); justify-content: space-between; margin-top: 30px; }
+        .template-square .title-divider { display: none; } .template-square .signature-box, .template-square .social-handle { color: #fbbf24; } .template-square .document-footer { border-top-color: rgba(251, 191, 36, 0.2); justify-content: space-between; margin-top: 30px; }
 
-        /* 10. بطاقة تهنئة (جديد - للأعياد) */
-        .template-card-greeting {
-            max-width: 650px; min-height: 650px; background: linear-gradient(to bottom, #1e1b4b, #312e81); color: #e0e7ff;
-        }
-        .template-card-greeting .content-area { justify-content: center; text-align: center; }
-        .template-card-greeting .document-title { color: #fde047; font-family: 'Reem Kufi', sans-serif; font-size: 3rem; }
-        .template-card-greeting .document-body { flex-grow: 0; font-size: 1.8rem; line-height: 2.2; }
-        .template-card-greeting .ornate-border { border: 4px solid #facc15; border-radius: 50% 50% 10px 10px / 20% 20% 10px 10px; /* شكل قبة إسلامية */ top: 25px; bottom: 25px; left: 25px; right: 25px; }
-        .template-card-greeting .ornate-border::before { display: none; } .template-card-greeting .corner { display: none; }
-        .template-card-greeting .title-divider::before, .template-card-greeting .title-divider::after { background: #facc15; }
-        .template-card-greeting .title-divider i { color: #fde047; }
-        .template-card-greeting .signature-box, .template-card-greeting .social-handle { color: #fde047; }
-        .template-card-greeting .document-footer { border-top: none; margin-top: 40px; justify-content: center; }
-        .template-card-greeting .social-handle { display: none; } /* إخفاء السوشيال في التهنئة للتركيز على الاسم */
-
-        /* 11. بطاقة سينمائية (جديد - للاقتباسات القوية) */
-        .template-card-cinematic {
-            max-width: 850px; min-height: 450px; background-color: #000000; color: #ffffff;
-        }
+        .thumb-cinematic { background: #000; color: #fff; border: 1px solid #333; }
+        .template-card-cinematic { max-width: 850px; min-height: 450px; background-color: #000000; color: #ffffff; }
         .template-card-cinematic .content-area { justify-content: center; padding: 50px; }
         .template-card-cinematic .document-title { color: #a1a1aa; font-family: 'Tajawal', sans-serif; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 5px; margin-bottom: 30px; }
         .template-card-cinematic .document-body { color: #ffffff; font-size: 2rem; font-weight: bold; text-align: center; flex-grow: 0; font-family: 'Amiri', serif; line-height: 1.8; text-shadow: 0 4px 20px rgba(255,255,255,0.3); }
         .template-card-cinematic .ornate-border { border-top: 1px solid #333; border-bottom: 1px solid #333; border-left: none; border-right: none; top: 30px; bottom: 30px; border-radius: 0; }
-        .template-card-cinematic .ornate-border::before { display: none; } .template-card-cinematic .corner { display: none; }
-        .template-card-cinematic .title-divider { display: none; }
-        .template-card-cinematic .document-footer { border-top: none; margin-top: 40px; }
-        .template-card-cinematic .signature-box, .template-card-cinematic .social-handle { color: #71717a; font-size: 1rem; }
-        .template-card-cinematic .signature-icon { display: none; }
+        .template-card-cinematic .ornate-border::before, .template-card-cinematic .corner, .template-card-cinematic .title-divider { display: none; }
+        .template-card-cinematic .document-footer { border-top: none; margin-top: 40px; } .template-card-cinematic .signature-box, .template-card-cinematic .social-handle { color: #71717a; font-size: 1rem; } .template-card-cinematic .signature-icon { display: none; }
 
-        /* 12. بطاقات مصغرة متنوعة */
-        .template-card-note { max-width: 500px; min-height: 450px; background-color: #fef08a; color: #451a03; border-radius: 5px 40px 5px 5px; box-shadow: 5px 10px 20px rgba(0,0,0,0.15); }
-        .template-card-note .ornate-border, .template-card-note .corner { display: none; }
-        .template-card-note .document-title { color: #b45309; } .template-card-note .title-divider::before, .template-card-note .title-divider::after { background: #ca8a04; }
-        .template-card-note .title-divider i { color: #ca8a04; } .template-card-note .document-footer { border-top: 1px dashed #ca8a04; } .template-card-note .signature-box, .template-card-note .social-handle { color: #b45309; }
-        
+        .thumb-wisdom { background: #022c22; color: #d4af37; border-radius: 10px; }
+        .template-card-wisdom { max-width: 650px; min-height: 400px; background-color: #022c22; color: #d1fae5; border-radius: 15px; }
+        .template-card-wisdom .ornate-border { border: 2px solid #d4af37; top: 15px; bottom: 15px; left: 15px; right: 15px; border-radius: 10px; }
+        .template-card-wisdom .ornate-border::before, .template-card-wisdom .corner { display: none; }
+        .template-card-wisdom .document-title, .template-card-wisdom .title-divider i, .template-card-wisdom .signature-box, .template-card-wisdom .social-handle { color: #d4af37; }
+        .template-card-wisdom .title-divider::before, .template-card-wisdom .title-divider::after { background: #d4af37; } .template-card-wisdom .document-footer { border-top: 1px solid rgba(212, 175, 55, 0.3); }
+
+        .thumb-alert { background: #ffffff; color: #ef4444; border-right: 4px solid #ef4444; }
         .template-card-alert { max-width: 600px; min-height: 350px; background-color: #ffffff; color: #1f2937; border-radius: 12px; border-right: 15px solid #ef4444; }
         .template-card-alert .ornate-border, .template-card-alert .corner, .template-card-alert .title-divider { display: none; }
         .template-card-alert .document-title { color: #ef4444; } .template-card-alert .document-footer { border-top: 1px solid #f3f4f6; } .template-card-alert .signature-box, .template-card-alert .social-handle { color: #9ca3af; }
-        
-        .template-card-wisdom { max-width: 650px; min-height: 400px; background-color: #022c22; color: #d1fae5; border-radius: 15px; }
-        .template-card-wisdom .ornate-border { border: 2px solid #d4af37; border-radius: 10px; } .template-card-wisdom .ornate-border::before, .template-card-wisdom .corner { display: none; }
-        .template-card-wisdom .document-title, .template-card-wisdom .title-divider i, .template-card-wisdom .signature-box, .template-card-wisdom .social-handle { color: #d4af37; } .template-card-wisdom .title-divider::before, .template-card-wisdom .title-divider::after { background: #d4af37; }
-        .template-card-wisdom .document-footer { border-top: 1px solid rgba(212, 175, 55, 0.3); }
 
-        /* الإطار الفاخر المشترك */
-        .ornate-border {
-            position: absolute; top: 20px; bottom: 20px; left: 20px; right: 20px;
-            border: 2px solid var(--primary-gold); pointer-events: none; z-index: 10; transition: all 0.5s ease;
-        }
-        .ornate-border::before {
-            content: ''; position: absolute; top: 6px; bottom: 6px; left: 6px; right: 6px;
-            border: 1px solid var(--dark-gold); opacity: 0.5; transition: all 0.5s ease;
-        }
-
+        /* الإطار المشترك والعناصر الأساسية للورقة */
+        .ornate-border { position: absolute; top: 20px; bottom: 20px; left: 20px; right: 20px; border: 2px solid var(--primary-gold); pointer-events: none; z-index: 10; transition: all 0.5s ease; }
+        .ornate-border::before { content: ''; position: absolute; top: 6px; bottom: 6px; left: 6px; right: 6px; border: 1px solid var(--dark-gold); opacity: 0.5; transition: all 0.5s ease; }
         .corner { position: absolute; width: 40px; height: 40px; border: 3px solid var(--primary-gold); pointer-events: none; transition: all 0.5s ease; }
-        .corner-tl { top: 15px; right: 15px; border-bottom: none; border-left: none; }
-        .corner-tr { top: 15px; left: 15px; border-bottom: none; border-right: none; }
-        .corner-bl { bottom: 15px; right: 15px; border-top: none; border-left: none; }
-        .corner-br { bottom: 15px; left: 15px; border-top: none; border-right: none; }
+        .corner-tl { top: 15px; right: 15px; border-bottom: none; border-left: none; } .corner-tr { top: 15px; left: 15px; border-bottom: none; border-right: none; }
+        .corner-bl { bottom: 15px; right: 15px; border-top: none; border-left: none; } .corner-br { bottom: 15px; left: 15px; border-top: none; border-right: none; }
 
-        /* المحتوى */
-        .content-area {
-            position: relative; z-index: 20; height: 100%; display: flex; flex-direction: column; padding: 20px 30px 30px 30px; 
-        }
+        .content-area { position: relative; z-index: 20; height: 100%; display: flex; flex-direction: column; padding: 20px 30px 30px 30px; }
 
-        /* الشعار الدائري الفاخر */
+        /* الشعار (الختم) */
         .author-badge {
             position: absolute; top: 20px; width: 85px; height: 85px; border-radius: 50%;
             background: rgba(255, 255, 255, 0.9); border: 2px solid var(--primary-gold);
-            display: flex; align-items: center; justify-content: center; z-index: 30;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: all 0.5s ease;
+            display: flex; align-items: center; justify-content: center; z-index: 30; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: all 0.5s ease;
         }
-        .author-badge::before {
-            content: ''; position: absolute; top: -6px; left: -6px; right: -6px; bottom: -6px;
-            border-radius: 50%; border: 3px dashed var(--primary-gold); transition: all 0.5s ease; animation: spin-slow 30s linear infinite;
-        }
-        .author-badge::after {
-            content: ''; position: absolute; top: 3px; left: 3px; right: 3px; bottom: 3px;
-            border-radius: 50%; border: 1px solid var(--primary-gold); opacity: 0.5; transition: all 0.5s ease;
-        }
+        .author-badge::before { content: ''; position: absolute; top: -6px; left: -6px; right: -6px; bottom: -6px; border-radius: 50%; border: 3px dashed var(--primary-gold); transition: all 0.5s ease; animation: spin-slow 30s linear infinite; }
+        .author-badge::after { content: ''; position: absolute; top: 3px; left: 3px; right: 3px; bottom: 3px; border-radius: 50%; border: 1px solid var(--primary-gold); opacity: 0.5; transition: all 0.5s ease; }
         @keyframes spin-slow { 100% { transform: rotate(360deg); } }
         .badge-right { right: 25px; } .badge-left { left: 25px; }
-
         .badge-text-content { font-family: 'Amiri', serif; text-align: center; color: var(--dark-gold); z-index: 2; display: flex; flex-direction: column; justify-content: center; align-items: center; line-height: 1.1; }
-        .badge-name1 { font-size: 0.85rem; font-weight: bold; }
-        .badge-divider { width: 35px; height: 1px; background-color: currentColor; margin: 4px 0; opacity: 0.7; border-radius: 1px; }
-        .badge-name2 { font-size: 1.05rem; font-weight: 900; }
+        .badge-name1 { font-size: 0.85rem; font-weight: bold; } .badge-divider { width: 35px; height: 1px; background-color: currentColor; margin: 4px 0; opacity: 0.7; } .badge-name2 { font-size: 1.05rem; font-weight: 900; }
+        
+        /* تلوين الختم للقوالب الجديدة */
+        .template-haramain .author-badge { background: #0b3d2c; border-color: #d4af37; box-shadow: 0 0 0 4px #0b3d2c; } .template-haramain .author-badge::before { border: 4px dotted #0b3d2c; top: -10px; left: -10px; right: -10px; bottom: -10px; animation: none; } .template-haramain .author-badge::after { border-color: #d4af37; } .template-haramain .badge-text-content { color: #d4af37; }
+        .template-university .author-badge { background: #fff; border-color: #166534; border-radius: 10px; } .template-university .author-badge::before { display: none; } .template-university .author-badge::after { border-radius: 8px; border-color: #166534; } .template-university .badge-text-content { color: #166534; font-family: 'Tajawal', sans-serif; }
+        .template-personal .author-badge { background: #c5a059; border: none; border-radius: 0 0 20px 20px; top: 0; width: 60px; height: 80px; } .template-personal .author-badge::before, .template-personal .author-badge::after { display: none; } .template-personal .badge-text-content { color: #0f172a; } .template-personal .badge-divider { display: none; }
 
-        /* إخفاء الشعار في البطاقات المصغرة والسينمائية */
-        .template-card-note .author-badge, .template-card-alert .author-badge, .template-card-wisdom .author-badge, .template-card-cinematic .author-badge, .template-minimalist .author-badge { display: none; }
+        /* باقي تلوين الأختام */
+        .template-islamic .author-badge { background: #0F4435; border: 2px solid #C4A265; box-shadow: 0 0 0 4px #0F4435; } .template-islamic .author-badge::before { border: 4px dotted #0F4435; top: -10px; left: -10px; right: -10px; bottom: -10px; animation: none; } .template-islamic .author-badge::after { border-color: #C4A265; } .template-islamic .badge-text-content { color: #C4A265; }
+        .template-square .author-badge { background: #0f172a; border-color: #fbbf24; } .template-square .author-badge::before { border-color: #fbbf24; border-style: dotted; } .template-square .badge-text-content { color: #fbbf24; }
+        .template-vintage .author-badge { background: #fdf6e3; border-color: #795548; box-shadow: 0 0 0 2px #795548; } .template-vintage .author-badge::before { display: none; } .template-vintage .badge-text-content { color: #5d4037; }
+        .template-velvet .author-badge { background: #0a0a0a; border-color: #eab308; } .template-velvet .author-badge::before { border-color: #eab308; } .template-velvet .badge-text-content { color: #fde047; }
+        /* إخفاء للبطاقات */
+        .template-card-note .author-badge, .template-card-alert .author-badge, .template-card-wisdom .author-badge, .template-card-cinematic .author-badge { display: none; }
 
         [contenteditable="true"] { outline: none; cursor: text; }
         [contenteditable="true"]:empty:before { content: attr(data-placeholder); color: #aaa; font-style: italic; opacity: 0.6; }
 
-        .document-title {
-            font-family: 'Amiri', serif; font-size: 2.5rem; text-align: center; color: var(--dark-gold);
-            margin-top: 30px; margin-bottom: 15px; font-weight: bold; line-height: 1.3; transition: all 0.5s ease;
-        }
+        .document-title { font-family: 'Amiri', serif; font-size: 2.5rem; text-align: center; color: var(--dark-gold); margin-top: 30px; margin-bottom: 15px; font-weight: bold; line-height: 1.3; transition: all 0.5s ease; }
         .title-divider { display: flex; align-items: center; justify-content: center; margin-bottom: 20px; opacity: 0.7; }
         .title-divider::before, .title-divider::after { content: ''; height: 2px; width: 100px; background: var(--primary-gold); margin: 0 15px; transition: all 0.5s ease; }
         .title-divider i { color: var(--primary-gold); font-size: 1.5rem; transition: all 0.5s ease; }
-
-        .document-body {
-            font-family: 'Tajawal', sans-serif; font-size: 1.3rem; line-height: 1.8; /* تباعد افتراضي */
-            flex-grow: 1; text-align: justify; color: var(--text-dark); transition: all 0.5s ease;
-        }
+        .document-body { font-family: 'Tajawal', sans-serif; font-size: 1.3rem; line-height: 1.8; flex-grow: 1; text-align: justify; color: var(--text-dark); transition: all 0.5s ease; }
         .document-body img { max-width: 100%; height: auto; border-radius: 8px; margin: 15px 0; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         .document-body ul, .document-body ol { padding-right: 20px; margin-bottom: 15px; }
 
-        .document-footer {
-            margin-top: auto; display: flex; justify-content: space-between; align-items: center;
-            padding-top: 20px; border-top: 1px dashed rgba(197, 160, 89, 0.4); transition: all 0.5s ease; width: 100%; box-sizing: border-box;
-        }
+        .document-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; padding-top: 20px; border-top: 1px dashed rgba(197, 160, 89, 0.4); transition: all 0.5s ease; width: 100%; box-sizing: border-box; }
         .social-handle { display: flex; align-items: center; gap: 8px; font-family: 'Tajawal', sans-serif; font-size: 1.1rem; color: var(--dark-gold); opacity: 0.8; transition: all 0.5s ease; }
         .social-handle span { border-bottom: 1px solid transparent; } .social-handle span:focus { border-bottom: 1px dashed currentColor; }
         .signature-box { display: flex; align-items: center; gap: 15px; font-family: 'Amiri', serif; font-size: 1.5rem; color: var(--dark-gold); transition: all 0.5s ease; }
         .signature-icon { font-size: 2rem; color: var(--primary-gold); animation: float 3s ease-in-out infinite; transition: all 0.5s ease; }
         .signature-text { min-width: 150px; border-bottom: 1px solid transparent; transition: border 0.3s; text-align: left; }
         .signature-text:focus { border-bottom: 1px dashed var(--primary-gold); }
-        
-        /* طبقات الملمس (Textures) الجديدة */
-        .texture-layer {
-            position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: 1; opacity: 0; transition: opacity 0.5s ease;
-        }
+
+        .texture-layer { position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: 1; opacity: 0; transition: opacity 0.5s ease; }
         .texture-noise { background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E"); opacity: 1; }
         .texture-islamic { background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 20.5V18H0v-2h20v-2H0v-2h20v-2H0V8h20V6H0V4h20V2H0V0h22v20h2V0h2v20h2V0h2v20h2V0h2v20h2V0h2v20h2v2H20v-1.5zM0 20h2v20H0V20zm4 0h2v20H4V20zm4 0h2v20H8V20zm4 0h2v20h-2V20zm4 0h2v20h-2V20zm4 4h20v2H20v-2zm0 4h20v2H20v-2zm0 4h20v2H20v-2zm0 4h20v2H20v-2z' fill='%239C92AC' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E"); }
         .texture-dots { background-image: radial-gradient(#000000 1px, transparent 1px); background-size: 20px 20px; opacity: 0.05; }
 
-        /* شاشة التحميل */
-        #loading-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(18, 20, 24, 0.95); display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--primary-gold); z-index: 1000; display: none; backdrop-filter: blur(5px); }
+        #loading-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 18, 22, 0.95); display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--primary-gold); z-index: 1000; display: none; backdrop-filter: blur(5px); }
         .spinner { font-size: 3.5rem; animation: spin 1s linear infinite; margin-bottom: 20px; }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        @media (max-width: 850px) { .paper-container { transform: scale(0.9); transform-origin: top center; margin-bottom: 0; } }
+        /* التجاوب مع الشاشات (الموبايل) */
+        @media (max-width: 1050px) {
+            .studio-layout { flex-direction: column; align-items: center; gap: 15px; }
+            /* تحويل اللوحات الجانبية لشريط تمرير أفقي أسفل شريط الأدوات */
+            .sidebar {
+                width: 100%; flex-direction: row; position: relative; top: 0; max-height: 80px;
+                overflow-x: auto; overflow-y: hidden; padding-bottom: 10px;
+            }
+            .sidebar::-webkit-scrollbar { height: 4px; }
+            .template-thumb { min-width: 150px; height: 50px; }
+            .category-title { display: none; } /* إخفاء العناوين في الموبايل لتوفير المساحة */
+            .paper-container { transform: scale(0.95); transform-origin: top center; }
+        }
         @media (max-width: 600px) {
-            .paper-container { transform: scale(0.7); }
+            .paper-container { transform: scale(0.8); }
             .toolbar { padding: 10px; gap: 5px; }
-            .template-select { width: 100%; margin-bottom: 5px; }
-            .divider { display: none; }
             .document-footer { flex-direction: column-reverse; gap: 15px; align-items: center; }
             .badge-right, .badge-left { transform: scale(0.7); }
             .badge-right { right: 5px; top: 5px; } .badge-left { left: 5px; top: 5px; }
@@ -361,187 +347,203 @@
 
     <input type="file" id="imageUpload" accept="image/*" style="display: none;" onchange="insertImage(event)">
 
-    <!-- شريط الأدوات -->
+    <!-- شريط الأدوات العلوي -->
     <div class="toolbar" id="toolbar">
         
-        <!-- القائمة المنسدلة لاختيار القالب -->
-        <select class="template-select" onchange="changeTemplate(this.value)" title="اختر تصميم الصفحة الأساسي">
-            <optgroup label="أوراق ومقالات فاخرة">
-                <option value="template-royal">الورقة الملكية (A4)</option>
-                <option value="template-velvet">الورقة المخملية (أسود وذهبي) ✨</option>
-                <option value="template-islamic">الورقة الإسلامية (زخارف خضراء)</option>
-                <option value="template-minimalist">الورقة الأكاديمية (أبيض نقي)</option>
-                <option value="template-emerald">الزمردي الفاخر (أخضر وذهبي)</option>
-                <option value="template-sapphire">الياقوت الأزرق (أزرق وفضي)</option>
-                <option value="template-rose">الوردي الحالم (دائري ناعم)</option>
-                <option value="template-vintage">المخطوطة الكلاسيكية (ورق قديم)</option>
-            </optgroup>
-            <optgroup label="بطاقات واقتباسات">
-                <option value="template-square">مربع الاقتباسات (للنصوص القصيرة)</option>
-                <option value="template-card-cinematic">بطاقة سينمائية (اقتباسات عميقة) 🎬</option>
-                <option value="template-card-greeting">بطاقة تهنئة (للمناسبات والأعياد) 🌙</option>
-                <option value="template-card-wisdom">بطاقة فائدة (إسلامية وراقية)</option>
-                <option value="template-card-alert">بطاقة تنبيه (عصرية ورسمية)</option>
-                <option value="template-card-note">بطاقة ملاحظة (ورقة لاصقة صفراء)</option>
-            </optgroup>
+        <!-- التبديل بين الأوراق والبطاقات -->
+        <select class="select-styled" id="categorySwitch" onchange="switchCategory(this.value)" title="تغيير القسم الأساسي" style="background-color: var(--primary-gold); color: white; border-color: var(--dark-gold);">
+            <option value="papers">قسم الأوراق والمقالات</option>
+            <option value="cards">قسم البطاقات والاقتباسات</option>
         </select>
 
-        <!-- ملمس الورقة (Textures) - أداة جديدة -->
-        <select class="template-select" onchange="changeTexture(this.value)" title="أضف ملمساً للورقة" style="width: auto; max-width: 120px;">
+        <select class="select-styled" onchange="changeTexture(this.value)" title="أضف ملمساً للورقة" style="width: auto; max-width: 120px;">
             <option value="texture-noise">ملمس ورق (طبيعي)</option>
             <option value="texture-islamic">زخرفة إسلامية</option>
             <option value="texture-dots">نقاط خفيفة</option>
             <option value="none">بدون ملمس (سادة)</option>
         </select>
 
-        <!-- نوع الخط -->
-        <select class="template-select" onchange="formatDoc('fontName', this.value)" title="اختر نوع الخط للنص المحدد" style="width: auto; max-width: 120px; margin-right: 5px;">
+        <select class="select-styled" onchange="formatDoc('fontName', this.value)" title="اختر نوع الخط للنص المحدد" style="width: auto; max-width: 120px;">
             <option value="Tajawal">تجول (حديث)</option>
             <option value="Amiri">أميري (رسمي)</option>
             <option value="Cairo">كايرو (عريض)</option>
             <option value="Lateef">لطيف (نسخ)</option>
             <option value="'Aref Ruqaa'">الرقعة</option>
             <option value="'Reem Kufi'">كوفي (عناوين)</option>
-            <option value="Changa">تشانجا</option>
             <option value="'Traditional Arabic'">تقليدي (كمبيوتر)</option>
         </select>
         
         <div class="divider"></div>
 
-        <!-- التنسيقات الأساسية -->
         <button class="tool-btn" onclick="formatDoc('bold')" title="خط عريض"><i class="fas fa-bold"></i></button>
         <button class="tool-btn" onclick="formatDoc('italic')" title="خط مائل"><i class="fas fa-italic"></i></button>
         <button class="tool-btn" onclick="formatDoc('underline')" title="خط سفلي"><i class="fas fa-underline"></i></button>
         
         <div class="divider"></div>
         
-        <!-- القوائم والتظليل وتباعد الأسطر (جديد) -->
-        <button class="tool-btn" onclick="formatDoc('insertUnorderedList')" title="قائمة نقطية"><i class="fas fa-list-ul"></i></button>
-        <button class="tool-btn" onclick="formatDoc('insertOrderedList')" title="قائمة رقمية"><i class="fas fa-list-ol"></i></button>
-        <button class="tool-btn highlight-btn" onclick="formatDoc('hiliteColor', '#fef08a')" title="قلم التمييز (تظليل أصفر)"><i class="fas fa-highlighter"></i></button>
-        <button class="tool-btn" onclick="toggleLineHeight()" title="تغيير تباعد الأسطر"><i class="fas fa-text-height"></i></button>
+        <!-- أزرار التراجع والإعادة (جديد) -->
+        <button class="tool-btn" onclick="formatDoc('undo')" title="تراجع"><i class="fas fa-undo"></i></button>
+        <button class="tool-btn" onclick="formatDoc('redo')" title="إعادة"><i class="fas fa-redo"></i></button>
         
         <div class="divider"></div>
         
-        <!-- الحجم والمحاذاة -->
-        <button class="tool-btn" onclick="changeFontSize(1)" title="تكبير الخط"><i class="fas fa-search-plus"></i></button>
-        <button class="tool-btn" onclick="changeFontSize(-1)" title="تصغير الخط"><i class="fas fa-search-minus"></i></button>
-        <button class="tool-btn" onclick="formatDoc('justifyRight')" title="محاذاة لليمين"><i class="fas fa-align-right"></i></button>
-        <button class="tool-btn" onclick="formatDoc('justifyCenter')" title="محاذاة للوسط"><i class="fas fa-align-center"></i></button>
+        <button class="tool-btn" onclick="formatDoc('insertUnorderedList')"><i class="fas fa-list-ul"></i></button>
+        <button class="tool-btn" onclick="formatDoc('insertOrderedList')"><i class="fas fa-list-ol"></i></button>
+        <button class="tool-btn highlight-btn" onclick="formatDoc('hiliteColor', '#fef08a')" title="قلم تمييز"><i class="fas fa-highlighter"></i></button>
         
         <div class="divider"></div>
         
-        <!-- إدراج وتلوين -->
-        <button class="tool-btn" onclick="document.getElementById('imageUpload').click()" title="إدراج صورة داخل النص"><i class="fas fa-image"></i></button>
+        <button class="tool-btn" onclick="changeFontSize(1)"><i class="fas fa-search-plus"></i></button>
+        <button class="tool-btn" onclick="changeFontSize(-1)"><i class="fas fa-search-minus"></i></button>
+        <button class="tool-btn" onclick="formatDoc('justifyRight')"><i class="fas fa-align-right"></i></button>
+        <button class="tool-btn" onclick="formatDoc('justifyCenter')"><i class="fas fa-align-center"></i></button>
+        
+        <div class="divider"></div>
+        
+        <button class="tool-btn" onclick="document.getElementById('imageUpload').click()" title="إدراج صورة"><i class="fas fa-image"></i></button>
         <div class="color-picker-group">
-            <i class="fas fa-font" title="لون النص"></i>
-            <input type="color" class="color-picker" id="textColor" oninput="formatDoc('foreColor', this.value)" title="لون النص">
+            <i class="fas fa-font"></i>
+            <input type="color" class="color-picker" id="textColor" oninput="formatDoc('foreColor', this.value)">
         </div>
         <div class="color-picker-group">
-            <i class="fas fa-fill-drip" title="لون الخلفية"></i>
-            <input type="color" class="color-picker" id="bgColor" oninput="changeBgColor(this.value)" value="#f4f5f7" title="لون الخلفية المخصصة">
+            <i class="fas fa-fill-drip"></i>
+            <input type="color" class="color-picker" id="bgColor" oninput="changeBgColor(this.value)" value="#f4f5f7">
         </div>
         
         <div class="divider"></div>
 
-        <!-- الأزرار الرئيسية -->
-        <button class="clear-btn" onclick="clearDocument()" title="مسح محتوى الورقة">
-            <i class="fas fa-trash-alt"></i> مسح
-        </button>
-        <button class="export-btn" onclick="exportAsImage()">
-            <i class="fas fa-camera"></i> حفظ الصورة للنشر
-        </button>
+        <!-- أزرار ملء الشاشة والطباعة (جديد) -->
+        <button class="tool-btn" onclick="toggleFullScreen()" title="ملء الشاشة لكتابة بلا مشتتات"><i class="fas fa-expand"></i></button>
+        <button class="tool-btn" onclick="window.print()" title="طباعة الورقة"><i class="fas fa-print"></i></button>
+        
+        <button class="clear-btn" onclick="clearDocument()"><i class="fas fa-trash-alt"></i></button>
+        <button class="export-btn share-btn" onclick="shareImage()"><i class="fas fa-share-nodes"></i> مشاركة</button>
+        <button class="export-btn" onclick="exportAsImage()"><i class="fas fa-camera"></i> حفظ كصورة</button>
     </div>
 
-    <!-- الورقة القابلة للتعديل والتصوير -->
-    <div class="paper-container template-royal" id="paper-capture">
+    <!-- استوديو العمل الأساسي -->
+    <div class="studio-layout">
         
-        <!-- طبقة الملمس (Texture Layer) -->
-        <div class="texture-layer texture-noise" id="texture-overlay"></div>
-
-        <!-- الزخارف والإطارات -->
-        <div class="ornate-border"></div>
-        <div class="corner corner-tl"></div>
-        <div class="corner corner-tr"></div>
-        <div class="corner corner-bl"></div>
-        <div class="corner corner-br"></div>
-
-        <!-- المحتوى الفعلي -->
-        <div class="content-area">
-            
-            <!-- الشعار الدائري الفاخر في الزاويتين -->
-            <div class="author-badge badge-right">
-                <div class="badge-text-content">
-                    <span class="badge-name1">آدم بحر</span>
-                    <span class="badge-divider"></span>
-                    <span class="badge-name2">العباسي</span>
-                </div>
-            </div>
-            
-            <div class="author-badge badge-left">
-                <div class="badge-text-content">
-                    <span class="badge-name1">آدم بحر</span>
-                    <span class="badge-divider"></span>
-                    <span class="badge-name2">العباسي</span>
-                </div>
-            </div>
-
-            <!-- العنوان -->
-            <div class="document-title" id="docTitle" contenteditable="true" data-placeholder="اكتب العنوان الرئيسي هنا..."></div>
-            
-            <div class="title-divider">
-                <i class="fas fa-leaf" id="divider-icon"></i>
-            </div>
-
-            <!-- النص الأساسي -->
-            <div class="document-body" id="docBody" contenteditable="true" data-placeholder="ابدأ بكتابة موضوعك الشيق هنا... المحرر الآن بكامل احترافيته يتيح لك التحكم المطلق!"></div>
-
-            <!-- التوقيع ومُعرّف السوشيال ميديا -->
-            <div class="document-footer">
-                <div class="social-handle">
-                    <i class="fab fa-twitter"></i>
-                    <span contenteditable="true" data-placeholder="حسابك...">@AdamBahr</span>
-                </div>
-                <div class="signature-box">
-                    <span class="signature-text" contenteditable="true" data-placeholder="اسم الكاتب...">كتبه: </span>
-                    <i class="fas fa-hand-holding-pen signature-icon"></i>
-                </div>
-            </div>
-
+        <!-- اللوحة الجانبية اليمنى -->
+        <div class="sidebar" id="sidebar-right">
+            <!-- سيتم تعبئتها بالجافاسكربت -->
         </div>
+
+        <!-- منطقة الورقة في المنتصف -->
+        <div class="main-editor-area">
+            <div class="paper-container template-haramain" id="paper-capture">
+                <div class="texture-layer texture-noise" id="texture-overlay"></div>
+                <div class="ornate-border"></div>
+                <div class="corner corner-tl"></div> <div class="corner corner-tr"></div>
+                <div class="corner corner-bl"></div> <div class="corner corner-br"></div>
+
+                <div class="content-area">
+                    <div class="author-badge badge-right">
+                        <div class="badge-text-content"><span class="badge-name1">آدم بحر</span><span class="badge-divider"></span><span class="badge-name2">العباسي</span></div>
+                    </div>
+                    <div class="author-badge badge-left">
+                        <div class="badge-text-content"><span class="badge-name1">آدم بحر</span><span class="badge-divider"></span><span class="badge-name2">العباسي</span></div>
+                    </div>
+
+                    <div class="document-title" id="docTitle" contenteditable="true" data-placeholder="اكتب العنوان الرئيسي هنا..."></div>
+                    <div class="title-divider"><i class="fas fa-kaaba" id="divider-icon"></i></div>
+
+                    <div class="document-body" id="docBody" contenteditable="true" data-placeholder="ابدأ بكتابة موضوعك الشيق هنا... اختر من القوالب الجانبية لتغيير شكل هذه الورقة بالكامل!"></div>
+
+                    <div class="document-footer">
+                        <div class="social-handle"><i class="fab fa-twitter"></i><span contenteditable="true" data-placeholder="حسابك...">@AdamBahr</span></div>
+                        <div class="signature-box"><span class="signature-text" contenteditable="true" data-placeholder="اسم الكاتب...">كتبه: </span><i class="fas fa-hand-holding-pen signature-icon"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- اللوحة الجانبية اليسرى -->
+        <div class="sidebar" id="sidebar-left">
+             <!-- سيتم تعبئتها بالجافاسكربت -->
+        </div>
+
     </div>
 
-    <!-- شاشة التحميل عند حفظ الصورة -->
     <div id="loading-overlay">
         <i class="fas fa-circle-notch spinner"></i>
         <h2 style="font-family: 'Amiri', serif;">جاري تصدير اللوحة الفنية...</h2>
     </div>
 
     <script>
-        // التنسيقات
+        // بيانات القوالب لتعبئة اللوحات الجانبية
+        const templatesData = {
+            papers: [
+                { id: 'template-haramain', name: 'الحرمين (أخضر وذهبي)', class: 'thumb-haramain', icon: 'fa-kaaba', side: 'right' },
+                { id: 'template-university', name: 'الجامعة (رسمي)', class: 'thumb-university', icon: 'fa-graduation-cap', side: 'right' },
+                { id: 'template-islamic', name: 'الزخرفة الأندلسية', class: 'thumb-islamic', icon: 'fa-book-open', side: 'right' },
+                { id: 'template-royal', name: 'الملكية الفاخرة', class: 'thumb-royal', icon: 'fa-leaf', side: 'left' },
+                { id: 'template-personal', name: 'الهوية الشخصية', class: 'thumb-personal', icon: 'fa-user-tie', side: 'left' },
+                { id: 'template-velvet', name: 'المخملية الليلية', class: 'thumb-velvet', icon: 'fa-crown', side: 'left' },
+                { id: 'template-vintage', name: 'المخطوطة القديمة', class: 'thumb-vintage', icon: 'fa-feather-alt', side: 'left' }
+            ],
+            cards: [
+                { id: 'template-square', name: 'مربع الاقتباسات', class: 'thumb-square', icon: 'fa-quote-right', side: 'right' },
+                { id: 'template-card-wisdom', name: 'بطاقة حكمة', class: 'thumb-wisdom', icon: 'fa-star-and-crescent', side: 'right' },
+                { id: 'template-card-cinematic', name: 'البطاقة السينمائية', class: 'thumb-cinematic', icon: 'fa-film', side: 'left' },
+                { id: 'template-card-alert', name: 'تنبيه عاجل', class: 'thumb-alert', icon: 'fa-bell', side: 'left' }
+            ]
+        };
+
+        // دالة تبديل الفئة (أوراق / بطاقات) ورسم الأزرار الجانبية
+        function switchCategory(category) {
+            const rightSidebar = document.getElementById('sidebar-right');
+            const leftSidebar = document.getElementById('sidebar-left');
+            
+            rightSidebar.innerHTML = `<div class="category-title">النماذج الكلاسيكية</div>`;
+            leftSidebar.innerHTML = `<div class="category-title">النماذج الحديثة</div>`;
+
+            templatesData[category].forEach(tpl => {
+                const btnHTML = `<div class="template-thumb ${tpl.class}" id="btn-${tpl.id}" onclick="applyTemplate('${tpl.id}', '${tpl.icon}')">
+                                    <i class="fas ${tpl.icon}" style="margin-left:8px;"></i> ${tpl.name}
+                                 </div>`;
+                if(tpl.side === 'right') rightSidebar.innerHTML += btnHTML;
+                else leftSidebar.innerHTML += btnHTML;
+            });
+
+            // تفعيل أول قالب تلقائياً عند تبديل الفئة
+            const firstTemplate = templatesData[category][0];
+            applyTemplate(firstTemplate.id, firstTemplate.icon);
+        }
+
+        // تطبيق القالب عند الضغط عليه
+        function applyTemplate(templateId, iconClass) {
+            const paper = document.getElementById('paper-capture');
+            const dividerIcon = document.getElementById('divider-icon');
+
+            // إزالة الكلاسات السابقة للقوالب
+            paper.className = 'paper-container';
+            // إضافة القالب الجديد
+            paper.classList.add(templateId);
+            paper.style.backgroundColor = '';
+
+            // تغيير الأيقونة أسفل العنوان
+            if(dividerIcon) dividerIcon.className = 'fas ' + iconClass;
+
+            // تمييز الزر المضغوط في الجوانب
+            document.querySelectorAll('.template-thumb').forEach(btn => btn.classList.remove('active'));
+            const activeBtn = document.getElementById('btn-' + templateId);
+            if(activeBtn) activeBtn.classList.add('active');
+        }
+
+        // التنسيقات العامة
         function formatDoc(cmd, value=null) {
             if (cmd === 'hiliteColor' && !document.queryCommandSupported('hiliteColor')) cmd = 'backColor'; 
             document.execCommand(cmd, false, value);
         }
 
-        // تكبير الخط
         let currentSize = 4;
         function changeFontSize(step) {
             currentSize += step;
-            if (currentSize > 7) currentSize = 7;
-            if (currentSize < 1) currentSize = 1;
+            if (currentSize < 1) currentSize = 1; if (currentSize > 7) currentSize = 7;
             formatDoc('fontSize', currentSize);
         }
 
-        // تغيير تباعد الأسطر (جديد)
-        let lineHeights = ['1.8', '2.2', '2.6', '1.4'];
-        let lhIndex = 0;
-        function toggleLineHeight() {
-            lhIndex = (lhIndex + 1) % lineHeights.length;
-            document.getElementById('docBody').style.lineHeight = lineHeights[lhIndex];
-        }
-
-        // إدراج صورة
         function insertImage(event) {
             const file = event.target.files[0];
             if (file) {
@@ -552,83 +554,112 @@
             event.target.value = '';
         }
 
-        // مسح الورقة
         function clearDocument() {
-            if(confirm("هل أنت متأكد من مسح المحتوى للبدء من جديد؟")) {
+            if(confirm("مسح المحتوى والبدء من جديد؟")) {
                 document.getElementById('docTitle').innerHTML = '';
                 document.getElementById('docBody').innerHTML = '';
                 document.getElementById('docTitle').focus();
             }
         }
 
-        // تغيير القالب
-        function changeTemplate(templateClass) {
-            const paper = document.getElementById('paper-capture');
-            const dividerIcon = document.getElementById('divider-icon');
-
-            // إزالة جميع القوالب
-            paper.className = 'paper-container ' + templateClass;
-            paper.style.backgroundColor = '';
-
-            // تغيير الأيقونة حسب القالب
-            switch(templateClass) {
-                case 'template-velvet': dividerIcon.className = 'fas fa-crown'; break;
-                case 'template-minimalist': dividerIcon.className = 'fas fa-pen'; break;
-                case 'template-square': dividerIcon.className = 'fas fa-quote-right'; break;
-                case 'template-vintage': dividerIcon.className = 'fas fa-feather-alt'; break;
-                case 'template-emerald': dividerIcon.className = 'fas fa-gem'; break;
-                case 'template-sapphire': dividerIcon.className = 'fas fa-star'; break;
-                case 'template-rose': dividerIcon.className = 'fas fa-heart'; break;
-                case 'template-islamic': dividerIcon.className = 'fas fa-book-open'; break;
-                case 'template-card-note': dividerIcon.className = 'fas fa-pen-nib'; break;
-                case 'template-card-wisdom': dividerIcon.className = 'fas fa-star-and-crescent'; break;
-                case 'template-card-greeting': dividerIcon.className = 'fas fa-moon'; break;
-                default: dividerIcon.className = 'fas fa-leaf'; 
-            }
-        }
-
-        // تغيير الملمس (Texture) - جديد
         function changeTexture(textureClass) {
             const overlay = document.getElementById('texture-overlay');
-            if (textureClass === 'none') {
-                overlay.style.opacity = '0';
-            } else {
-                overlay.className = 'texture-layer ' + textureClass;
-                overlay.style.opacity = '1';
-            }
+            if (textureClass === 'none') { overlay.style.opacity = '0'; } 
+            else { overlay.className = 'texture-layer ' + textureClass; overlay.style.opacity = '1'; }
         }
 
-        // تغيير لون الخلفية يدوياً
         function changeBgColor(color) {
             document.getElementById('paper-capture').style.backgroundColor = color;
         }
 
-        // التصدير إلى صورة
+        // دالة ملء الشاشة (جديدة)
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.log(`Error attempting to enable fullscreen: ${err.message}`);
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
         function exportAsImage() {
             const paper = document.getElementById('paper-capture');
             const overlay = document.getElementById('loading-overlay');
+            
+            // التسمية الذكية (تأخذ العنوان المكتوب ليكون اسم الملف)
+            let docTitle = document.getElementById('docTitle').innerText.trim();
+            if(!docTitle) docTitle = 'لوحة_احترافية';
+
             overlay.style.display = 'flex';
 
             document.fonts.ready.then(() => {
-                html2canvas(paper, {
-                    scale: 2, 
-                    useCORS: true,
-                    backgroundColor: null 
-                }).then(canvas => {
+                html2canvas(paper, { scale: 2, useCORS: true, backgroundColor: null }).then(canvas => {
                     overlay.style.display = 'none';
                     const link = document.createElement('a');
-                    link.download = 'مقال_فاخر.png';
+                    link.download = docTitle + '.png'; // استخدام التسمية الذكية هنا
                     link.href = canvas.toDataURL("image/png");
                     link.click();
                 }).catch(err => {
                     overlay.style.display = 'none';
-                    alert("حدث خطأ أثناء التقاط الصورة.");
+                    alert("حدث خطأ أثناء التصوير.");
                 });
             });
         }
 
-        // البداية
-        window.onload = function() { document.getElementById('docTitle').focus(); };
+        // دالة المشاركة المباشرة
+        function shareImage() {
+            const paper = document.getElementById('paper-capture');
+            const overlay = document.getElementById('loading-overlay');
+            
+            // التسمية الذكية للمشاركة أيضاً
+            let docTitle = document.getElementById('docTitle').innerText.trim();
+            if(!docTitle) docTitle = 'لوحة_احترافية';
+
+            overlay.style.display = 'flex';
+
+            document.fonts.ready.then(() => {
+                html2canvas(paper, { scale: 2, useCORS: true, backgroundColor: null }).then(canvas => {
+                    // تحويل الصورة إلى ملف لكي تقبلها تطبيقات الجوال
+                    canvas.toBlob(function(blob) {
+                        const file = new File([blob], docTitle + ".png", { type: "image/png" });
+                        
+                        // التحقق مما إذا كان المتصفح يدعم ميزة المشاركة المباشرة
+                        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                            navigator.share({
+                                title: docTitle,
+                                text: 'تم التصميم عبر استوديو النشر الفاخر',
+                                files: [file]
+                            }).then(() => {
+                                overlay.style.display = 'none';
+                            }).catch((error) => {
+                                overlay.style.display = 'none';
+                                console.log('تم إلغاء المشاركة', error);
+                            });
+                        } else {
+                            // إذا كان المتصفح لا يدعم، يتم تحميل الصورة كبديل احتياطي
+                            overlay.style.display = 'none';
+                            alert("متصفحك لا يدعم المشاركة المباشرة، سيتم تحميل الصورة بدلاً من ذلك.");
+                            const link = document.createElement('a');
+                            link.download = docTitle + '.png';
+                            link.href = canvas.toDataURL("image/png");
+                            link.click();
+                        }
+                    }, 'image/png');
+                }).catch(err => {
+                    overlay.style.display = 'none';
+                    alert("حدث خطأ أثناء التجهيز للمشاركة.");
+                });
+            });
+        }
+
+        // التهيئة عند فتح الصفحة
+        window.onload = function() { 
+            switchCategory('papers'); // تحميل فئة الأوراق أولاً
+            document.getElementById('docTitle').focus(); 
+        };
     </script>
 </body>
 </html>
